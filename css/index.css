@@ -1,0 +1,1244 @@
+body {
+    font-family: "Roboto", Helvetica, serif;
+    overflow: hidden;
+    user-select: none;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.frame {
+    background-color: #16161f;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.frame .div {
+    background-color: #16161f;
+    width: 1920px;
+    height: 1080px;
+    position: relative;
+}
+
+.frame .links {
+    position: absolute;
+    width: 342px;
+    height: 1080px;
+    top: 0;
+    left: 0;
+}
+
+.frame .overlap {
+    position: relative;
+    width: 345px;
+    height: 1082px;
+    top: -1px;
+    left: -1px;
+}
+
+.frame .links-bg {
+    position: absolute;
+    width: 344px;
+    height: 1082px;
+    top: 0;
+    left: 0;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-color: #616161;
+}
+
+.frame .sidebar {
+    position: absolute;
+    width: 221px;
+    height: 262px;
+    top: 318px;
+    left: 57px;
+}
+
+.frame .marktplatz {
+    position: absolute;
+    width: 162px;
+    height: 24px;
+    top: 238px;
+    left: 20px;
+}
+
+.frame .img {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 0;
+    left: 0;
+}
+
+.frame .text-wrapper {
+    position: absolute;
+    top: 1px;
+    left: 62px;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #3e3e4f;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .verein {
+    position: absolute;
+    width: 122px;
+    height: 24px;
+    top: 164px;
+    left: 20px;
+}
+
+.frame .liga {
+    position: absolute;
+    width: 103px;
+    height: 24px;
+    top: 90px;
+    left: 20px;
+}
+
+.frame .dashboard {
+    position: absolute;
+    width: 223px;
+    height: 56px;
+    top: 0;
+    left: 0;
+}
+
+.frame .overlap-group {
+    position: relative;
+    width: 221px;
+    height: 56px;
+    background-color: #252535;
+    border-radius: 20px;
+}
+
+.frame .dashboard-icon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 16px;
+    left: 20px;
+}
+
+.frame .dashboard-text {
+    position: absolute;
+    top: 17px;
+    left: 82px;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #4242a2;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .profile {
+    position: absolute;
+    width: 150px;
+    height: 165px;
+    top: 55px;
+    left: 97px;
+}
+
+.frame .overlap-2 {
+    position: relative;
+    height: 165px;
+}
+
+.frame .logo {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    border-radius: 75px;
+}
+
+.frame .level {
+    position: absolute;
+    bottom: 0;
+    left: 20%;
+    display: flex;
+    justify-content: center;
+}
+
+.frame .level-text-wrapper {
+    position: relative;
+    background-color: #4242a2;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.frame .level-text {
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+    text-align: center;
+    padding: 5px 10px;
+}
+
+.frame .einstellungen {
+    position: absolute;
+    width: 344px;
+    height: 93px;
+    top: 988px;
+    left: 1px;
+}
+
+.frame .overlap-3 {
+    position: relative;
+    height: 95px;
+    top: -1px;
+    left: -1px;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-color: #616161;
+}
+
+.frame .einstellungen-icon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 35px;
+    left: 76px;
+}
+
+.frame .einstellungen-text {
+    position: absolute;
+    top: 36px;
+    left: 138px;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #3e3e4f;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .main {
+    position: absolute;
+    width: 1433px;
+    height: 1007px;
+    top: 0;
+    left: 444px;
+}
+
+.frame .ergebnisse {
+    margin-top: 10px;
+    width: 300px;
+    height: 835px;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.frame .ergebnis-text {
+    position: absolute;
+    width: 300px;
+    height: 878px;
+    top: 128px;
+    left: 1096px;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .ergebnis {
+    position: relative;
+    margin-top: 20px;
+    width: 302px;
+    height: 147px;
+}
+
+.fram .result1 {
+    margin-top: 100px;
+    width: 302px;
+    height: 147px;
+}
+
+.frame .overlap-group-2 {
+    position: relative;
+    width: 296px;
+    height: 147px;
+    background-color: #242433;
+    border-radius: 30px;
+}
+
+.frame .text-wrapper-2 {
+    position: absolute;
+    top: 87px;
+    left: 109px;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 400;
+    color: #747474;
+    font-size: 15px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .datum {
+    position: absolute;
+    top: 110px;
+    left: 0;
+    right: 0;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #616161;
+    font-size: 13px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .ergebnis-team {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 31px;
+    left: 206px;
+    object-fit: cover;
+}
+
+.frame .ergebnis-team-2 {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 31px;
+    left: 40px;
+    object-fit: cover;
+}
+
+.frame .ergebnis-text-wrapper {
+    position: absolute;
+    width: 52px;
+    height: 22px;
+    top: 45px;
+    left: 122px;
+    background-color: #4242a2;
+    border-radius: 10px;
+}
+
+.frame .text {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    right: 0;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .overlap-wrapper {
+    position: absolute;
+    width: 302px;
+    height: 147px;
+    top: 560px;
+    left: 2px;
+}
+
+.frame .ergebnis-team-3 {
+    position: absolute;
+    width: 50px;
+    height: 63px;
+    top: 26px;
+    left: 206px;
+    object-fit: cover;
+}
+
+.frame .ergebnis-team-4 {
+    position: absolute;
+    width: 45px;
+    height: 56px;
+    top: 29px;
+    left: 42px;
+    object-fit: cover;
+}
+
+.frame .overlap-group-wrapper {
+    position: absolute;
+    width: 302px;
+    height: 147px;
+    top: 389px;
+    left: 2px;
+}
+
+.frame .ergebnis-team-5 {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 34px;
+    left: 206px;
+    object-fit: cover;
+}
+
+.frame .ergebnis-team-6 {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 32px;
+    left: 40px;
+    object-fit: cover;
+}
+
+.frame .div-wrapper {
+    position: absolute;
+    width: 302px;
+    height: 147px;
+    top: 218px;
+    left: 2px;
+}
+
+.frame .ergebnis-team-7 {
+    position: absolute;
+    width: 50px;
+    height: 55px;
+    top: 29px;
+    left: 206px;
+    object-fit: cover;
+}
+
+.frame .ergebnis-team-8 {
+    position: absolute;
+    width: 50px;
+    height: 41px;
+    top: 37px;
+    left: 40px;
+    object-fit: cover;
+}
+
+.frame .ergebnis-2 {
+    position: absolute;
+    width: 302px;
+    height: 147px;
+    top: 47px;
+    left: 2px;
+}
+
+.frame .ergebnis-team-9 {
+    position: absolute;
+    width: 50px;
+    height: 63px;
+    top: 21px;
+    left: 206px;
+    object-fit: cover;
+}
+
+.frame .ergebnis-team-10 {
+    position: absolute;
+    width: 50px;
+    height: 62px;
+    top: 22px;
+    left: 40px;
+    object-fit: cover;
+}
+
+.frame .userinfo {
+    position: absolute;
+    width: 296px;
+    height: 99px;
+    top: 0;
+    right: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    overflow: hidden;
+}
+
+.frame .ellipse {
+    width: 50px;
+    height: 50px;
+    background: #4242a2;
+    border-radius: 25px;
+    margin-left: 15px;
+
+}
+
+.frame .text-wrapper-3 {
+    align-items: center;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #a1a1a1;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+    text-align: right;
+}
+
+.frame .matches {
+    position: absolute;
+    width: 992px;
+    height: 543px;
+    top: 464px;
+    left: 0;
+    display: block;
+}
+
+.frame .match {
+    position: relative;
+    margin-top: 25px;
+    width: 990px;
+    height: 147px;
+    background-color: #242433;
+    border-radius: 30px;
+}
+
+.frame .match:first-child {
+    margin-top: 52px;
+}
+
+.frame .group {
+    position: absolute;
+    width: 120px;
+    height: 67px;
+    top: 43px;
+    left: 439px;
+}
+
+.frame .text-wrapper-4 {
+    position: absolute;
+    top: 52px;
+    left: 0;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #616161;
+    font-size: 13px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .text-wrapper-5 {
+    position: absolute;
+    top: 30px;
+    left: 6px;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 600;
+    color: #a1a1a1;
+    font-size: 13px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .text-wrapper-6 {
+    position: absolute;
+    margin-top: 45px;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .gegner {
+    position: absolute;
+    width: 197px;
+    height: 55px;
+    top: 43px;
+    left: 749px;
+}
+
+.frame .gegner-text {
+    position: absolute;
+    top: 0;
+    right: 75px;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 20px;
+    text-align: right;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .icon {
+    position: absolute;
+    width: 50px;
+    top: 0;
+    left: 143px;
+    object-fit: cover;
+}
+
+.frame .type-wrapper {
+    position: absolute;
+    width: 81px;
+    height: 27px;
+    top: 28px;
+    left: 42px;
+    background-color: #a24242;
+    border-radius: 10px;
+}
+
+.frame .type {
+    position: absolute;
+    top: 4px;
+    left: 15px;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 500;
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .team {
+    position: absolute;
+    width: 206px;
+    height: 63px;
+    top: 35px;
+    left: 48px;
+    display: flex;
+    align-items: center;
+}
+
+.frame .img-2 {
+    width: 50px;
+    object-fit: cover;
+}
+
+.frame .team-text {
+    position: absolute;
+    top: 8px;
+    left: 70px;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .team-type-wrapper {
+    position: absolute;
+    width: 104px;
+    height: 27px;
+    top: 36px;
+    left: 70px;
+    background-color: #4242a2;
+    border-radius: 10px;
+}
+
+.frame .team-type {
+    position: absolute;
+    top: 4px;
+    left: 14px;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 500;
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .match-2 {
+    position: absolute;
+    width: 990px;
+    height: 147px;
+    top: 225px;
+    left: 0;
+    background-color: #242433;
+    border-radius: 30px;
+}
+
+.frame .info {
+    position: absolute;
+    width: 100%;
+    height: 67px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.frame .date {
+    position: absolute;
+    padding-top: 95px;
+    font-weight: 700;
+    color: #616161;
+    font-family: "Roboto", Helvetica, serif;
+    font-size: 13px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .stadium {
+    padding-top: 75px;
+    font-weight: 600;
+    color: #a1a1a1;
+    font-family: "Roboto", Helvetica, serif;
+    font-size: 13px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .gegner-2 {
+    position: absolute;
+    width: 206px;
+    height: 55px;
+    top: 43px;
+    left: 740px;
+}
+
+.frame .gegner-type-wrapper {
+    position: absolute;
+    width: 81px;
+    height: 27px;
+    top: 28px;
+    left: 51px;
+    background-color: #a24242;
+    border-radius: 10px;
+}
+
+.frame .gegner-img {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 5px;
+    left: 152px;
+    object-fit: cover;
+}
+
+.frame .match-3 {
+    position: absolute;
+    width: 990px;
+    height: 147px;
+    top: 54px;
+    left: 0;
+    background-color: #242433;
+    border-radius: 30px;
+}
+
+.frame .gegner-3 {
+    position: absolute;
+    width: 216px;
+    height: 56px;
+    top: 43px;
+    left: 730px;
+}
+
+.frame .overlap-group-3 {
+    position: absolute;
+    width: 81px;
+    height: 27px;
+    top: 28px;
+    left: 61px;
+    background-color: #a24242;
+    border-radius: 10px;
+}
+
+.frame .img-3 {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 6px;
+    left: 162px;
+    object-fit: cover;
+}
+
+.frame .matches-text {
+    position: absolute;
+    width: 134px;
+    top: 0;
+    left: 0;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .next-match {
+    position: absolute;
+    width: 992px;
+    height: 275px;
+    top: 129px;
+    left: 0;
+}
+
+.frame .match-4 {
+    position: absolute;
+    width: 990px;
+    height: 221px;
+    top: 54px;
+    left: 0;
+    background-color: #242433;
+    border-radius: 30px;
+}
+
+.frame .gegner-4 {
+    position: absolute;
+    width: 216px;
+    height: 56px;
+    top: 83px;
+    left: 730px;
+}
+
+.frame .info-2 {
+    position: absolute;
+    width: 159px;
+    height: 113px;
+    top: 51px;
+    left: 417px;
+}
+
+.frame .info-date {
+    position: absolute;
+    top: 22px;
+    right: 0;
+    left: 0;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #616161;
+    font-size: 13px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .info-stadium {
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 600;
+    color: #a1a1a1;
+    font-size: 13px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .group-2 {
+    position: absolute;
+    width: 157px;
+    height: 45px;
+    top: 68px;
+    left: 0;
+}
+
+.frame .overlap-group-4:disabled {
+    position: relative;
+    width: 155px;
+    height: 45px;
+    background-color: #4242a280;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    border: none;
+    color: #747474;
+}
+
+.frame .overlap-group-4:enabled {
+    position: relative;
+    width: 155px;
+    height: 45px;
+    background-color: #5F5FFF;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    border: none;
+    color: #ffff;
+}
+
+.frame .text-wrapper-7 {
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 400;
+
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .team-2 {
+    position: absolute;
+    width: 206px;
+    height: 63px;
+    top: 79px;
+    left: 48px;
+}
+
+.frame .next-matches-text {
+    position: absolute;
+    width: 147px;
+    top: 0;
+    left: 0;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.modal-bg {
+    background-color: #16161f;
+    border-radius: 30px;
+}
+
+.modal-title {
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #5F5FFF;
+    font-size: 30px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #5F5FFF;
+    outline: none;
+    border: none;
+}
+
+.login-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form input,
+form select {
+    background-color: #252533 !important;
+    color: white !important;
+    border: 1px solid #555 !important;
+}
+
+label {
+    color: white !important;
+}
+
+.spinner-border {
+    display: none;
+    color: #5F5FFF;
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    top: 50%;
+    bottom: 50%;
+}
+
+.btn {
+    width: 100%;
+}
+
+#teamInfos_badge {
+    width: 50px;
+    margin-right: 18px;
+    margin-left: 5px;
+}
+
+.nav-link {
+    color: #5F5FFF;
+}
+
+.nav-link.active {
+    color: #252533;
+!important;
+}
+
+.modal-header {
+    border: none;
+}
+
+
+.spiele {
+    width: 100%;
+    height: 500px;
+    display: block;
+    overflow-y: auto;
+}
+
+.frame .spiel {
+    position: relative;
+    margin-top: 25px;
+    width: 100%;
+    height: 140px;
+    background-color: #242433;
+    border-radius: 30px;
+}
+
+.frame .match:first-child {
+    margin-top: 52px;
+}
+
+.spiel_info {
+    position: absolute;
+    width: 100%;
+    height: 67px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-size: 10px;
+}
+
+.spiel_date {
+    position: absolute;
+    padding-top: 75px;
+    font-weight: 700;
+    color: #616161;
+    font-family: "Roboto", Helvetica, serif;
+    font-size: 11px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.spiel_vs {
+    position: absolute;
+    margin-top: 50px;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 15px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.spiel_team {
+    position: absolute;
+    width: 206px;
+    height: 63px;
+    top: 35px;
+    left: 48px;
+    display: flex;
+    align-items: center;
+}
+
+.spiel_team_text {
+    margin-left: 10px;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 17px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.spiel_team_badge {
+    width: 50px;
+    object-fit: cover;
+}
+
+.spiel_gegner {
+    position: absolute;
+    width: 206px;
+    height: 63px;
+    top: 35px;
+    right: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+
+}
+
+.spiel_gegner_text {
+    margin-right: 10px;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 17px;
+    text-align: right;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.spiel_gegner_badge {
+    width: 50px;
+    object-fit: cover;
+}
+
+.tabelle {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.tabelle .active {
+    background-color: #22222f;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.tabelle th {
+    color: #616161;
+    text-align: center;
+}
+
+.tabelle td {
+    color: #ffff;
+    text-align: center;
+}
+
+.tabelle th:nth-child(1), .tabelle th:nth-child(2) {
+    color: #616161;
+    text-align: left;
+}
+
+.tabelle td:nth-child(1), .tabelle td:nth-child(2) {
+    color: #ffff;
+    text-align: left;
+}
+
+.tabelle td:nth-child(9) {
+    font-weight: 700;
+}
+
+.tabelle .logo2 {
+    width: 20px;
+    margin-right: 10px;
+}
+
+.spieler {
+    width: 100%;
+    height: 556px;
+    overflow-y: auto;
+}
+
+.box {
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+    background-color: #252533;
+    border-radius: 10px;
+}
+
+.spielerbox {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.pb {
+    margin-left: 20px;
+    width: 80px;
+    border-radius: 100%;
+    background-color: rgb(128, 128, 128);
+}
+
+.infobox {
+    margin-left: 30px;
+}
+
+.pos {
+    color: #5F5FFF;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.name {
+    color: #FFF;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.rating {
+    color: #5F5FFF;
+    position: absolute;
+    right: 50px;
+    text-align: right;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #535361 #171720;
+}
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+    border: none;
+    outline: none;
+}
+*::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background-color: #171720;
+}
+
+*::-webkit-scrollbar-track:hover {
+    background-color: #171720;
+}
+
+*::-webkit-scrollbar-track:active {
+    background-color: #171720;
+}
+
+*::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #535361;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: #535361;
+}
+
+*::-webkit-scrollbar-thumb:active {
+    background-color: #535361;
+}

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/index.css">
+    <title>TacticX</title>
+</head>
+<body>
+<div class="frame">
+    <div class="div">
+        <div class="links">
+            <div class="overlap">
+                <div class="links-bg"></div>
+                <div class="sidebar">
+                    <a class="marktplatz" href="marktplatz.html" draggable="false">
+                        <img class="img" src="https://c.animaapp.com/buYDRGhc/img/marktplatz-icon.svg"/>
+                        <div class="text-wrapper">Marktplatz</div>
+                    </a>
+                    <a class="verein" href="meinteam.html" draggable="false">
+                        <img class="img" src="https://c.animaapp.com/buYDRGhc/img/verein-icon.svg"/>
+                        <div class="text-wrapper">Verein</div>
+                    </a>
+                    <a class="liga" href="liga.html" draggable="false">
+                        <img class="img" src="https://c.animaapp.com/buYDRGhc/img/liga-icon.svg"/>
+                        <div class="text-wrapper">Liga</div>
+                    </a>
+                    <a class="dashboard" href="../index.html" draggable="false">
+                        <div class="overlap-group">
+                            <img class="dashboard-icon" src="https://c.animaapp.com/buYDRGhc/img/dashboard-icon.png"/>
+                            <div class="dashboard-text">Dashboard</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="profile" draggable="false">
+                    <div class="overlap-2">
+                        <img class="logo" alt="logo" width="512" src="../assets/imgs/logo.png" draggable="false">
+                        <div class="level">
+                            <div class="level-text-wrapper">
+                                <div class="level-text">TacticX</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="einstellungen" href="einstellungen.html" draggable="false">
+                    <div class="overlap-3">
+                        <img class="einstellungen-icon"
+                             src="https://c.animaapp.com/buYDRGhc/img/einstellungen-icon.svg"/>
+                        <div class="einstellungen-text">Einstellungen</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="modal fade" id="teamInfos" tabindex="-1" aria-labelledby="teamInfosLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content modal-bg">
+                    <div class="modal-header">
+                        <img id="teamInfos_badge" alt="logo" src="">
+                        <h5 class="modal-title" id="teamInfosLabel"></h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab"
+                                                    href="#spiele">Spiele</a></li>
+                            <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#tabelle">Tabelle</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" data-bs-toggle="tab"
+                                                    href="#mannschaft">Mannschaft</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane container active" id="spiele">
+                                <div class="spiele"></div>
+                            </div>
+                            <div class="tab-pane container" id="tabelle">
+                                <table class="tabelle"></table>
+                            </div>
+                            <div class="tab-pane container" id="mannschaft">
+                                <div class="spieler">
+                                    <div class="box" id="torwart"></div>
+                                    <div class="box" id="verteidigung"></div>
+                                    <div class="box" id="mittelfeld"></div>
+                                    <div class="box" id="sturm"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade login " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+             tabindex="-1" aria-labelledby="staticBackdropLabel">
+            <div class="modal-dialog modal-fullscreen ">
+                <div class="modal-content modal-bg">
+                    <div class="modal-header">
+                        <h1 class="modal-title" id="staticBackdropLabel">TacticX</h1>
+                    </div>
+                    <div class="login-body">
+                        <form>
+                            <div class="login-form">
+                                <div class="form-group">
+                                    <label for="ligaDropdown">Liga</label>
+                                    <select class="form-control" id="ligaDropdown" required>
+                                        <option value="">Ausw&auml;hlen</option>
+                                        <option value="4328">GB | Premier League</option>
+                                        <option value="4331">DE | Bundesliga</option>
+                                        <option value="4335">ES | La Liga</option>
+                                        <option value="4332">IT | Serie A</option>
+                                        <option value="4334">FR | Ligue 1</option>
+                                        <option value="4621">AT | Bundesliga</option>
+                                        <!-- Add more options as needed -->
+                                    </select>
+                                </div>
+                                <div class="form-group" id="teamDropdownGroup" style="display:none;">
+                                    <label for="teamDropdown">Team</label>
+                                    <select class="form-control" id="teamDropdown" required>
+                                    </select>
+                                </div>
+                                <div class="form-check">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Erstellen</button>
+                            </div>
+                            <div class="spinner-border" role="status"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="ergebnis-text">
+                Ergebnisse
+                <div class="ergebnisse">
+                </div>
+            </div>
+            <div class="userinfo">
+                <div class="text-wrapper-3" id="username"><%= username %></div>
+                <img class="ellipse"
+                     src="data:image/png;base64,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"
+                     alt="profile" draggable="false">
+            </div>
+            <div class="matches" id="matches">
+                <div class="matches-text">Deine Matches</div>
+                `
+            </div>
+            <div class="next-match" id="next-match">
+                <div class="next-matches-text">N&auml;chstes Match</div>
+            </div>
+        </div>
+    </div>
+    <div class="spinner-border" role="status"></div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/index.js"></script>
+</body>
+</html>
