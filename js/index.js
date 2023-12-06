@@ -19,10 +19,7 @@ let gameData = {
 };
 
 $(document).ready(async function () {
-    await login_checkUser();
-    await setInfos()
-    await fetchDataAndLoad();
-
+    await loadIncomingMatches();
 });
 
 async function fetchDataAndLoad() {
@@ -195,11 +192,8 @@ async function getTeamsInLeague(leagueID) {
 }
 
 async function loadIncomingMatches() {
-
     try {
-
         let i = 0;
-
         for (const x of gameData.kalendar) {
             let team1, team2, team1_badge, team2_badge, stadium, date, gegner;
             if ((x.idHomeTeam === gameData.team || x.idAwayTeam === gameData.team) && x.intRound == gameData.spieltag + i && i < 4) {

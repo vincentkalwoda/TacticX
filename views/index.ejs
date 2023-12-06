@@ -141,17 +141,143 @@
             </div>
             <div class="matches" id="matches">
                 <div class="matches-text">Deine Matches</div>
-                `
+                <%
+                let i = 0
+                        for (const x of kalendar) {
+                    let team1, team2, team1_badge, team2_badge, stadium, date, gegner;
+                if ((x.idHomeTeam === teamID || x.idAwayTeam === teamID) && x.intRound == spieltag + i && i < 4) {
+                    if (x.idHomeTeam === teamID) {
+                        team1 = x.strHomeTeam;
+                        team2 = x.strAwayTeam;
+                    } else if (x.idAwayTeam === teamID) {
+                        team1 = x.strAwayTeam;
+                        team2 = x.strHomeTeam;
+                    }
+                    stadium = x.strVenue;
+
+                    for (const y of teams) {
+                        if (y.strTeam == team1) team1_badge = y.strTeamBadge;
+                        if (y.strTeam == team2) team2_badge = y.strTeamBadge;
+                    }
+
+                    if (x.idHomeTeam != teamID)
+                        gegner = x.idHomeTeam;
+                    else gegner = x.idAwayTeam;
+
+                    const inputDate = x.dateEvent.split("-");
+                    const formattedDate = `${inputDate[2]}.${inputDate[1]}.${inputDate[0]}`;
+                    const inputTime = x.strTimeLocal.split(":");
+                    const formattedTime = `${inputTime[0]}:${inputTime[1]}`;
+                    date = `${formattedDate} | ${formattedTime}`;
+                    const inMilliseconds = Date.parse(x.dateEvent) - Date.parse(datum);
+                    let inDays = inMilliseconds / (24 * 60 * 60 * 1000);
+                    inDays = Math.round(inDays)
+
+                if (i >= 1) { %>
+                    <div class="match">
+                        <div class="info">
+                            <div class="date"><%= date %></div>
+                            <div class="stadium" id="match<%= i %>-stadium"><%= stadium %></div>
+                            <div class="text-wrapper-6">VS</div>
+                        </div>
+                        <div class="gegner" onclick="showTeamInfos(${gegner})">
+                            <div class="gegner-text" id="match<%= i %>-team2"><%= team2 %></div>
+                            <img class="icon" id="<%= i %>-img2" src="<%= team2_badge %>" draggable="false">
+                            <div class="type-wrapper">
+                                <div class="type">Gegner</div>
+                            </div>
+                        </div>
+                        <div class="team" onclick="showTeamInfos(${teamID})">
+                            <img class="img-2" id="match<%= i %>-img1" src="<%= team1_badge %>" draggable="false">
+                            <div class="team-text" id="<%= i %>-team1"><%= team1 %></div>
+                            <div class="team-type-wrapper">
+                                <div class="team-type">Dein Team</div>
+                            </div>
+                        </div>
+                    </div>
+                <% }
+
+
+
+                    i++;
+                }} %>
             </div>
             <div class="next-match" id="next-match">
                 <div class="next-matches-text">N&auml;chstes Match</div>
+                <%
+                i = 0
+                        for (const x of kalendar) {
+                    let i = 0
+                    let team1, team2, team1_badge, team2_badge, stadium, date, gegner;
+                if ((x.idHomeTeam === teamID || x.idAwayTeam === teamID) && x.intRound == spieltag + i && i < 4) {
+                    if (x.idHomeTeam === teamID) {
+                        team1 = x.strHomeTeam;
+                        team2 = x.strAwayTeam;
+                    } else if (x.idAwayTeam === teamID) {
+                        team1 = x.strAwayTeam;
+                        team2 = x.strHomeTeam;
+                    }
+                    stadium = x.strVenue;
+
+                    for (const y of teams) {
+                        if (y.strTeam == team1) team1_badge = y.strTeamBadge;
+                        if (y.strTeam == team2) team2_badge = y.strTeamBadge;
+                    }
+
+                    if (x.idHomeTeam != teamID)
+                        gegner = x.idHomeTeam;
+                    else gegner = x.idAwayTeam;
+
+                    const inputDate = x.dateEvent.split("-");
+                    const formattedDate = `${inputDate[2]}.${inputDate[1]}.${inputDate[0]}`;
+                    const inputTime = x.strTimeLocal.split(":");
+                    const formattedTime = `${inputTime[0]}:${inputTime[1]}`;
+                    date = `${formattedDate} | ${formattedTime}`;
+                    const inMilliseconds = Date.parse(x.dateEvent) - Date.parse(datum);
+                    let inDays = inMilliseconds / (24 * 60 * 60 * 1000);
+                    inDays = Math.round(inDays)
+
+                if (i === 0) { %>
+                    <div class="match-4">
+                        <div class="gegner-4" onclick="showTeamInfos(${gegner})">
+                            <div class="overlap-group-3">
+                                <div class="type">Gegner</div>
+                            </div>
+                            <div class="gegner-text" id="match1-team2"><%= team2 %></div>
+                            <img class="img-3" id="match1-img2"
+                                 src="<%= team2_badge %>" draggable="false">
+                        </div>
+                        <div class="info-2">
+                            <div class="info-date"><%= date %></div>
+                            <div class="info-stadium" id="match1-stadium"><%= stadium %></div>
+                            <div class="group-2">
+                                <button class="overlap-group-4">
+                                    <div class="text-wrapper-7"><%= inDays %> Tage</div>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="team-2" onclick="showTeamInfos(${gameData.team})">
+                            <img class="img-2" id="match1-img1"
+                                 src="<%= team1_badge %>" draggable="false">
+                            <div class="team-text" id="match1-team1"><%= team1 %></div>
+                            <div class="team-type-wrapper">
+                                <div class="team-type">Dein Team</div>
+                            </div>
+                        </div>
+                    </div>
+                <% }
+
+                }
+                } %>
             </div>
         </div>
     </div>
     <div class="spinner-border" role="status"></div>
 </div>
+<!-- Include jQuery library -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../js/index.js"></script>
+
 </body>
 </html>

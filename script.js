@@ -14,6 +14,9 @@ const connection  = mysql.createConnection({
     user: 'root',
     password: 'admin',
     database: 'tacticx',
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
 app.use(session({
@@ -35,11 +38,12 @@ app.get('/*.js', (req, res) => {
 app.use('/css', express.static(__dirname + '/css'));
 app.use('/js', express.static(__dirname + '/js'));
 
-app.get('/', function(request, response) {
-    if(!request.session.loggedin)
+app.get('/', function (request, response) {
+    if (!request.session.loggedin)
         response.redirect("/login")
-    else
+    else {
         response.redirect("/dashboard")
+    }
 });
 
 //Login-Check Datenbank
@@ -107,10 +111,36 @@ app.get('/register', (request, response) => {
 app.get('/dashboard', function(request, response) {
     if (request.session.loggedin) {
         const username = request.session.username;
-        response.render('index', {username})
+        loadUserData(username, function (userData) {
+            if (userData)
+                response.render('index', userData)
+        })
+
     } else
         response.redirect('/login');
 });
+
+function loadUserData(username, callback) {
+    connection.query('SELECT * FROM users WHERE username = ?', [username], function (error, results, fields) {
+        if (error) {
+            throw error;
+        } else {
+            let userData = null;
+            if (results.length > 0) {
+                userData = {
+                    teamID: results[0].teamID,
+                    teams: JSON.parse(results[0].teams),
+                    kalendar: JSON.parse(results[0].kalendar),
+                    spieltag: results[0].spieltag,
+                    datum: results[0].datum,
+                    username: username
+                };
+            }
+            callback(userData);
+        }
+    });
+}
+
 
 
 
