@@ -1,0 +1,1278 @@
+body {
+    font-family: "Roboto", Helvetica, serif;
+    overflow: hidden;
+    user-select: none;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.frame {
+    background-color: #16161f;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.frame .div {
+    background-color: #16161f;
+    width: 1920px;
+    height: 1080px;
+    position: relative;
+}
+
+.frame .links {
+    position: absolute;
+    width: 342px;
+    height: 1080px;
+    top: 0;
+    left: 0;
+}
+
+.frame .overlap {
+    position: relative;
+    width: 345px;
+    height: 1082px;
+    top: -1px;
+    left: -1px;
+}
+
+.frame .links-bg {
+    position: absolute;
+    width: 344px;
+    height: 1082px;
+    top: 0;
+    left: 0;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-color: #616161;
+}
+
+.frame .sidebar {
+    position: absolute;
+    width: 221px;
+    height: 262px;
+    top: 318px;
+    left: 57px;
+}
+
+.frame .marktplatz {
+    position: absolute;
+    width: 162px;
+    height: 24px;
+    top: 238px;
+    left: 20px;
+}
+
+.frame .img {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 0;
+    left: 0;
+}
+
+.frame .text-wrapper {
+    position: absolute;
+    top: 1px;
+    left: 62px;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #3e3e4f;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .verein {
+    position: absolute;
+    width: 122px;
+    height: 24px;
+    top: 164px;
+    left: 20px;
+}
+
+.frame .liga {
+    position: absolute;
+    width: 103px;
+    height: 24px;
+    top: 90px;
+    left: 20px;
+}
+
+.frame .dashboard {
+    position: absolute;
+    width: 223px;
+    height: 56px;
+    top: 0;
+    left: 0;
+}
+
+.frame .overlap-group {
+    position: relative;
+    width: 221px;
+    height: 56px;
+    background-color: #252535;
+    border-radius: 20px;
+}
+
+.frame .dashboard-icon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 16px;
+    left: 20px;
+}
+
+.frame .dashboard-text {
+    position: absolute;
+    top: 17px;
+    left: 82px;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #3e3e4f;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .profile {
+    position: absolute;
+    width: 150px;
+    height: 165px;
+    top: 55px;
+    left: 97px;
+}
+
+.frame .overlap-2 {
+    position: relative;
+    height: 165px;
+}
+
+.frame .logo {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    border-radius: 75px;
+}
+
+.frame .level {
+    position: absolute;
+    bottom: 0;
+    left: 20%;
+    display: flex;
+    justify-content: center;
+}
+
+.frame .level-text-wrapper {
+    position: relative;
+    background-color: #4242a2;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.frame .level-text {
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+    text-align: center;
+    padding: 5px 10px;
+}
+
+.frame .einstellungen {
+    position: absolute;
+    width: 344px;
+    height: 93px;
+    top: 988px;
+    left: 1px;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-color: #616161;
+}
+
+.frame .overlap-3 {
+    position: relative;
+    height: 95px;
+    top: -1px;
+    left: -1px;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-color: #616161;
+}
+
+.frame .einstellungen-icon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 35px;
+    left: 76px;
+}
+
+.frame .einstellungen-text {
+    position: absolute;
+    top: 36px;
+    left: 138px;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #3e3e4f;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .group-2 {
+    position: absolute;
+    width: 221px;
+    height: 246px;
+    top: 333px;
+    left: 56px;
+}
+
+.frame .group-wrapper {
+    position: absolute;
+    width: 159px;
+    height: 24px;
+    top: 0;
+    left: 20px;
+}
+
+.frame .group-3 {
+    position: relative;
+    width: 161px;
+    height: 24px;
+}
+
+.frame .img {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    top: 0;
+    left: 0;
+}
+
+.frame .text-wrapper {
+    position: absolute;
+    top: 1px;
+    left: 62px;
+    font-family: "Roboto-Bold", Helvetica;
+    font-weight: 700;
+    color: #3e3e4f;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.liga-text {
+    position: absolute;
+    top: 1px;
+    left: 62px;
+    font-family: "Roboto-Bold", Helvetica;
+    font-weight: 700;
+    color: #4242a2;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .div-wrapper {
+    position: absolute;
+    width: 221px;
+    height: 56px;
+    top: 72px;
+    left: 0;
+    background-color: #252535;
+    border-radius: 20px;
+}
+
+.frame .group-4 {
+    position: relative;
+    width: 103px;
+    height: 24px;
+    top: 16px;
+    left: 20px;
+}
+
+.frame .text-wrapper-2 {
+    position: absolute;
+    top: 1px;
+    left: 62px;
+    font-weight: 700;
+    color: #4242a2;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .group-5 {
+    position: absolute;
+    width: 122px;
+    height: 24px;
+    top: 148px;
+    left: 20px;
+}
+
+.frame .group-6 {
+    position: absolute;
+    width: 162px;
+    height: 24px;
+    top: 222px;
+    left: 20px;
+}
+
+.frame .group-7 {
+    position: absolute;
+    width: 152px;
+    height: 203px;
+    top: 54px;
+    left: 96px;
+}
+
+.frame .untitled-wrapper {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    border-radius: 75px;
+}
+
+.frame .untitled {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: 25px;
+    left: 25px;
+    object-fit: cover;
+}
+
+.frame .text-wrapper-3 {
+    position: absolute;
+    top: 165px;
+    left: 20px;
+    font-family: "Roboto-Black", Helvetica;
+    font-weight: 900;
+    color: #5f5fff;
+    font-size: 32px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .overlap-wrapper {
+    position: absolute;
+    width: 342px;
+    height: 93px;
+    top: 987px;
+    left: 0;
+}
+
+.frame .overlap-2 {
+    position: relative;
+    width: 344px;
+    height: 95px;
+    top: -1px;
+    left: -1px;
+}
+
+.frame .group-8 {
+    position: relative;
+    width: 187px;
+    height: 24px;
+    top: 35px;
+    left: 76px;
+}
+
+.frame .group-9 {
+    position: absolute;
+    width: 1397px;
+    height: 981px;
+    top: 25px;
+    left: 443px;
+}
+
+.frame .group-10 {
+    position: absolute;
+    width: 300px;
+    height: 878px;
+    top: 103px;
+    left: 1099px;
+}
+
+.frame .text-wrapper-4 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: "Roboto-Bold", Helvetica;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .group-11 {
+    position: absolute;
+    width: 296px;
+    height: 147px;
+    top: 731px;
+    left: 2px;
+    background-color: #242433;
+    border-radius: 30px;
+}
+
+.frame .group-12 {
+    position: absolute;
+    width: 115px;
+    height: 38px;
+    top: 87px;
+    left: 89px;
+}
+
+.frame .text-wrapper-5 {
+    position: absolute;
+    top: 0;
+    left: 21px;
+    font-family: "Roboto-Regular", Helvetica;
+    font-weight: 400;
+    color: #747474;
+    font-size: 15px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .text-wrapper-6 {
+    position: absolute;
+    top: 23px;
+    left: 0;
+    font-family: "Roboto-Bold", Helvetica;
+    font-weight: 700;
+    color: #616161;
+    font-size: 13px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .group-13 {
+    position: absolute;
+    width: 23px;
+    height: 19px;
+    top: 47px;
+    left: 138px;
+}
+
+.frame .text-wrapper-7 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: "Roboto-Bold", Helvetica;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .image {
+    width: 50px;
+    height: 50px;
+    top: 31px;
+    left: 40px;
+    position: absolute;
+    object-fit: cover;
+}
+
+.frame .image-2 {
+    width: 50px;
+    height: 50px;
+    top: 31px;
+    left: 206px;
+    position: absolute;
+    object-fit: cover;
+}
+
+.frame .group-14 {
+    position: absolute;
+    width: 296px;
+    height: 147px;
+    top: 560px;
+    left: 2px;
+    background-color: #242433;
+    border-radius: 30px;
+}
+
+.frame .image-3 {
+    width: 45px;
+    height: 56px;
+    top: 29px;
+    left: 42px;
+    position: absolute;
+    object-fit: cover;
+}
+
+.frame .image-4 {
+    top: 26px;
+    position: absolute;
+    width: 50px;
+    height: 63px;
+    left: 206px;
+    object-fit: cover;
+}
+
+.frame .group-15 {
+    position: absolute;
+    width: 296px;
+    height: 147px;
+    top: 389px;
+    left: 2px;
+    background-color: #242433;
+    border-radius: 30px;
+}
+
+.frame .image-5 {
+    width: 50px;
+    height: 50px;
+    top: 32px;
+    left: 40px;
+    position: absolute;
+    object-fit: cover;
+}
+
+.frame .image-6 {
+    width: 50px;
+    height: 50px;
+    top: 34px;
+    left: 206px;
+    position: absolute;
+    object-fit: cover;
+}
+
+.frame .group-16 {
+    position: absolute;
+    width: 296px;
+    height: 147px;
+    top: 218px;
+    left: 2px;
+    background-color: #242433;
+    border-radius: 30px;
+}
+
+.frame .image-7 {
+    width: 50px;
+    height: 41px;
+    top: 37px;
+    left: 40px;
+    position: absolute;
+    object-fit: cover;
+}
+
+.frame .image-8 {
+    width: 50px;
+    height: 55px;
+    top: 29px;
+    left: 206px;
+    position: absolute;
+    object-fit: cover;
+}
+
+.frame .group-17 {
+    position: absolute;
+    width: 296px;
+    height: 147px;
+    top: 47px;
+    left: 2px;
+    background-color: #242433;
+    border-radius: 30px;
+}
+
+.frame .image-9 {
+    position: absolute;
+    width: 50px;
+    height: 62px;
+    top: 22px;
+    left: 40px;
+    object-fit: cover;
+}
+
+.frame .image-10 {
+    top: 21px;
+    position: absolute;
+    width: 50px;
+    height: 63px;
+    left: 206px;
+    object-fit: cover;
+}
+
+.frame .group-18 {
+    position: absolute;
+    width: 123px;
+    height: 50px;
+    top: 0;
+    left: 1221px;
+}
+
+.frame .ellipse {
+    width: 50px;
+    height: 50px;
+    left: 71px;
+    background-color: #747474;
+    border-radius: 25px;
+    position: absolute;
+    top: 0;
+}
+
+.frame .text-wrapper-8 {
+    position: absolute;
+    top: 13px;
+    left: 0;
+    font-family: "Roboto-Bold", Helvetica;
+    font-weight: 700;
+    color: #a1a1a1;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .group-19 {
+    position: absolute;
+    width: 992px;
+    height: 558px;
+    top: 96px;
+    left: 0;
+}
+
+.frame .text-wrapper-9 {
+    position: absolute;
+    width: 66px;
+    top: 0;
+    left: 0;
+    font-family: "Roboto-Bold", Helvetica;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .group-20 {
+    position: absolute;
+    width: 990px;
+    height: 504px;
+    top: 54px;
+    left: 0;
+    background-color: #242433;
+    border-radius: 30px;
+}
+
+.frame .group-21 {
+    position: absolute;
+    width: 908px;
+    height: 27px;
+    top: 78px;
+    left: 50px;
+}
+
+.frame .image-11 {
+    width: 20px;
+    height: 25px;
+    top: 0;
+    left: 38px;
+    position: absolute;
+    object-fit: cover;
+}
+
+.frame .text-wrapper-10 {
+    position: absolute;
+    width: 132px;
+    top: 4px;
+    left: 77px;
+    font-family: "Roboto-Bold", Helvetica;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.frame .text-wrapper-11 {
+    position: absolute;
+    width: 12px;
+    top: 4px;
+    left: 478px;
+    font-family: "Roboto-Regular", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.frame .text-wrapper-12 {
+    width: 12px;
+    left: 520px;
+    position: absolute;
+    top: 4px;
+    font-family: "Roboto-Regular", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.frame .text-wrapper-13 {
+    width: 12px;
+    left: 556px;
+    position: absolute;
+    top: 4px;
+    font-family: "Roboto-Regular", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.frame .text-wrapper-14 {
+    width: 12px;
+    left: 594px;
+    position: absolute;
+    top: 4px;
+    font-family: "Roboto-Regular", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.frame .text-wrapper-15 {
+    width: 23px;
+    left: 626px;
+    position: absolute;
+    top: 4px;
+    font-family: "Roboto-Regular", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.frame .text-wrapper-16 {
+    width: 12px;
+    left: 674px;
+    position: absolute;
+    top: 4px;
+    font-family: "Roboto-Regular", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.frame .text-wrapper-17 {
+    width: 23px;
+    left: 717px;
+    position: absolute;
+    top: 4px;
+    font-family: "Roboto-Regular", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.frame .text-wrapper-18 {
+    position: absolute;
+    width: 18px;
+    top: 4px;
+    left: 0;
+    font-family: "Roboto-Bold", Helvetica;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.frame .group-22 {
+    position: absolute;
+    width: 124px;
+    height: 20px;
+    top: 6px;
+    left: 766px;
+}
+
+.frame .ellipse-2 {
+    width: 20px;
+    height: 20px;
+    left: 0;
+    background-color: #00b512;
+    border-radius: 9.99px/10px;
+    position: absolute;
+    top: 0;
+}
+
+.frame .ellipse-3 {
+    width: 20px;
+    height: 20px;
+    left: 26px;
+    background-color: #00b512;
+    border-radius: 9.99px/10px;
+    position: absolute;
+    top: 0;
+}
+
+.frame .ellipse-4 {
+    width: 20px;
+    height: 20px;
+    left: 52px;
+    background-color: #00b512;
+    border-radius: 9.99px/10px;
+    position: absolute;
+    top: 0;
+}
+
+.frame .ellipse-5 {
+    width: 20px;
+    height: 20px;
+    left: 78px;
+    background-color: #00b512;
+    border-radius: 9.99px/10px;
+    position: absolute;
+    top: 0;
+}
+
+.frame .ellipse-6 {
+    width: 20px;
+    height: 20px;
+    left: 104px;
+    background-color: #00b512;
+    border-radius: 9.99px/10px;
+    position: absolute;
+    top: 0;
+}
+
+.frame .group-23 {
+    position: absolute;
+    width: 908px;
+    height: 27px;
+    top: 111px;
+    left: 50px;
+}
+
+.frame .group-24 {
+    position: absolute;
+    width: 908px;
+    height: 27px;
+    top: 45px;
+    left: 50px;
+}
+
+.frame .group-25 {
+    position: absolute;
+    width: 436px;
+    height: 23px;
+    top: 16px;
+    left: 523px;
+}
+
+.frame .text-wrapper-19 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: "Roboto-Bold", Helvetica;
+    font-weight: 700;
+    color: #616161;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .text-wrapper-20 {
+    position: absolute;
+    top: 0;
+    left: 47px;
+    font-family: "Roboto-Bold", Helvetica;
+    font-weight: 700;
+    color: #616161;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .text-wrapper-21 {
+    position: absolute;
+    top: 0;
+    left: 83px;
+    font-family: "Roboto-Bold", Helvetica;
+    font-weight: 700;
+    color: #616161;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .text-wrapper-22 {
+    position: absolute;
+    top: 0;
+    left: 120px;
+    font-family: "Roboto-Bold", Helvetica;
+    font-weight: 700;
+    color: #616161;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .text-wrapper-23 {
+    position: absolute;
+    top: 0;
+    left: 158px;
+    font-family: "Roboto-Bold", Helvetica;
+    font-weight: 700;
+    color: #616161;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .text-wrapper-24 {
+    position: absolute;
+    top: 0;
+    left: 244px;
+    font-family: "Roboto-Bold", Helvetica;
+    font-weight: 700;
+    color: #616161;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .text-wrapper-25 {
+    position: absolute;
+    top: 0;
+    left: 293px;
+    font-family: "Roboto-Bold", Helvetica;
+    font-weight: 700;
+    color: #616161;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .text-wrapper-26 {
+    position: absolute;
+    top: 0;
+    left: 194px;
+    font-family: "Roboto-Bold", Helvetica;
+    font-weight: 700;
+    color: #616161;
+    font-size: 20px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .group-26 {
+    position: absolute;
+    width: 908px;
+    height: 27px;
+    top: 144px;
+    left: 50px;
+}
+
+.frame .group-27 {
+    position: absolute;
+    width: 908px;
+    height: 27px;
+    top: 177px;
+    left: 50px;
+}
+
+.frame .group-28 {
+    position: absolute;
+    width: 908px;
+    height: 27px;
+    top: 210px;
+    left: 50px;
+}
+
+.frame .group-29 {
+    position: absolute;
+    width: 908px;
+    height: 27px;
+    top: 243px;
+    left: 50px;
+}
+
+.frame .group-30 {
+    position: absolute;
+    width: 908px;
+    height: 27px;
+    top: 309px;
+    left: 50px;
+}
+
+.frame .group-31 {
+    position: absolute;
+    width: 908px;
+    height: 27px;
+    top: 342px;
+    left: 50px;
+}
+
+.frame .group-32 {
+    position: absolute;
+    width: 908px;
+    height: 27px;
+    top: 276px;
+    left: 50px;
+}
+
+.frame .group-33 {
+    position: absolute;
+    width: 908px;
+    height: 27px;
+    top: 375px;
+    left: 50px;
+}
+
+.frame .group-34 {
+    position: absolute;
+    width: 908px;
+    height: 27px;
+    top: 408px;
+    left: 50px;
+}
+
+.frame .group-35 {
+    position: absolute;
+    width: 908px;
+    height: 27px;
+    top: 441px;
+    left: 50px;
+}
+
+.frame .statistiken {
+    position: absolute;
+    width: 991px;
+    height: 289px;
+    top: 692px;
+    left: 0;
+}
+
+.frame .overlap-group-wrapper {
+    position: absolute;
+    width: 311px;
+    height: 231px;
+    top: 58px;
+    left: 680px;
+}
+
+.frame .overlap-3 {
+    position: relative;
+    width: 309px;
+    height: 231px;
+    background-color: #242433;
+    border-radius: 30px;
+}
+
+.frame .text-wrapper-27 {
+    position: absolute;
+    top: 23px;
+    left: 32px;
+    font-family: "Roboto-Medium", Helvetica;
+    font-weight: 500;
+    color: #a1a1a1;
+    font-size: 16px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .div-2 {
+    position: absolute;
+    width: 253px;
+    height: 139px;
+    top: 60px;
+    left: 32px;
+}
+
+.frame .div-3 {
+    position: absolute;
+    width: 257px;
+    height: 25px;
+    top: 114px;
+    left: 0;
+}
+
+.frame .text-wrapper-28 {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    font-family: "Roboto-SemiBold", Helvetica;
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 18px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .overlap-group-2 {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    top: 0;
+    left: 228px;
+    background-color: #4242a2;
+    border-radius: 12.5px;
+}
+
+.frame .text-wrapper-29 {
+    position: absolute;
+    top: 3px;
+    left: 8px;
+    font-family: "Roboto-Regular", Helvetica;
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+.frame .div-4 {
+    position: absolute;
+    width: 257px;
+    height: 25px;
+    top: 76px;
+    left: 0;
+}
+
+.frame .div-5 {
+    position: absolute;
+    width: 257px;
+    height: 25px;
+    top: 38px;
+    left: 0;
+}
+
+.frame .div-6 {
+    position: absolute;
+    width: 257px;
+    height: 25px;
+    top: 0;
+    left: 0;
+}
+
+.frame .torvorlagenliste {
+    position: absolute;
+    width: 311px;
+    height: 231px;
+    top: 58px;
+    left: 340px;
+}
+
+.frame .torschtzenliste {
+    position: absolute;
+    width: 311px;
+    height: 231px;
+    top: 58px;
+    left: 0;
+}
+
+
+.tabelle {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.tabelle .active {
+    background-color: #22222f;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.tabelle th {
+    color: #616161;
+    text-align: center;
+}
+
+.tabelle td {
+    color: #ffff;
+    text-align: center;
+}
+
+.tabelle th:nth-child(1), .tabelle th:nth-child(2) {
+    color: #616161;
+    text-align: left;
+}
+
+.tabelle td:nth-child(1), .tabelle td:nth-child(2) {
+    color: #ffff;
+    text-align: left;
+}
+
+.tabelle td:nth-child(9) {
+    font-weight: 700;
+}
+
+.tabelle .logo2 {
+    width: 20px;
+    margin-right: 10px;
+}
