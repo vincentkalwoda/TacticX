@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="../css/liga.css"/>
+</head>
+<body>
+<div class="frame">
+    <div class="div">
+        <div class="links">
+            <div class="overlap">
+                <div class="links-bg"></div>
+                <div class="sidebar">
+                    <a class="marktplatz" draggable="false">
+                        <img class="img" src="https://c.animaapp.com/buYDRGhc/img/marktplatz-icon.svg"/>
+                        <div class="text-wrapper">Marktplatz</div>
+                    </a>
+                    <a class="verein" draggable="false">
+                        <img class="img" src="https://c.animaapp.com/buYDRGhc/img/verein-icon.svg"/>
+                        <div class="text-wrapper">Verein</div>
+                    </a>
+                    <div class="div-wrapper">
+                        <a class="group-4 liga" draggable="false">
+                            <img class="img" src="https://c.animaapp.com/WIUSBDf6/img/ph-soccer-ball-fill.svg"/>
+                            <div class="liga-text">Liga</div>
+                        </a>
+                    </div>
+                    <a class="dashboard" draggable="false">
+                        <img class="dashboard-icon"
+                             src="https://c.animaapp.com/WIUSBDf6/img/material-symbols-dashboard.svg"/>
+                        <div class="dashboard-text">Dashboard</div>
+                    </a>
+                </div>
+                <div class="profile" draggable="false">
+                    <div class="overlap-2">
+                        <img class="logo" alt="logo" width="512" src="../assets/imgs/logo.png" draggable="false">
+                        <div class="level">
+                            <div class="level-text-wrapper">
+                                <div class="level-text">TacticX</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="einstellungen" href="einstellungen.html" draggable="false">
+                    <img class="einstellungen-icon"
+                         src="https://c.animaapp.com/buYDRGhc/img/einstellungen-icon.svg"/>
+                    <div class="einstellungen-text">Einstellungen</div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="group-9">
+        <div class="group-10">
+            <div class="text-wrapper-4">Kommende Spiele</div>
+            <div class="group-11">
+                <div class="group-12">
+                    <div class="text-wrapper-5">Spieltag 13</div>
+                    <div class="text-wrapper-6">14.11.2023 | 17:30</div>
+                </div>
+                <div class="group-13">
+                    <div class="text-wrapper-7">VS</div>
+                </div>
+                <img class="image" src="img/image-7.png"/>
+                <img class="image-2" src="img/image-8.png"/>
+            </div>
+            <div class="group-14">
+                <div class="group-12">
+                    <div class="text-wrapper-5">Spieltag 13</div>
+                    <div class="text-wrapper-6">14.11.2023 | 17:30</div>
+                </div>
+                <img class="image-3" src="img/image-1-2.png"/>
+                <img class="image-4" src="img/image.png"/>
+                <div class="group-13">
+                    <div class="text-wrapper-7">VS</div>
+                </div>
+            </div>
+            <div class="group-15">
+                <div class="group-12">
+                    <div class="text-wrapper-5">Spieltag 13</div>
+                    <div class="text-wrapper-6">14.11.2023 | 17:30</div>
+                </div>
+                <div class="group-13">
+                    <div class="text-wrapper-7">VS</div>
+                </div>
+                <img class="image-5" src="img/image-5.png"/>
+                <img class="image-6" src="img/image-6.png"/>
+            </div>
+            <div class="group-16">
+                <div class="group-12">
+                    <div class="text-wrapper-5">Spieltag 13</div>
+                    <div class="text-wrapper-6">14.11.2023 | 17:30</div>
+                </div>
+                <img class="image-7" src="img/image-3.png"/>
+                <img class="image-8" src="img/image-4.png"/>
+                <div class="group-13">
+                    <div class="text-wrapper-7">VS</div>
+                </div>
+            </div>
+            <div class="group-17">
+                <div class="group-12">
+                    <div class="text-wrapper-5">Spieltag 13</div>
+                    <div class="text-wrapper-6">14.11.2023 | 17:30</div>
+                </div>
+                <img class="image-9" src="img/image-1.png"/>
+                <img class="image-10" src="img/image-2.png"/>
+                <div class="group-13">
+                    <div class="text-wrapper-7">VS</div>
+                </div>
+            </div>
+        </div>
+        <div class="group-18">
+            <div class="ellipse"></div>
+            <div class="text-wrapper-8"><%= username %></div>
+        </div>
+        <div class="group-19">
+            <div class="text-wrapper-9">Tabelle</div>
+            <div class="group-20">
+                <table class="tabelle">
+                    <thead>
+                    <tr>
+                        <th>PL</th>
+                        <th>Klub</th>
+                        <th>SP</th>
+                        <th>S</th>
+                        <th>U</th>
+                        <th>N</th>
+                        <th>T</th>
+                        <th>TD</th>
+                        <th>PKT</th>
+                        <th>Letzte 5</th>
+                    </tr>
+                    </thead>
+
+                    <%
+                    let i = 1;
+                            for(const x of tabelle) {
+                    %>
+                        <tr>
+                            <td><%= i %></td>
+                            <td><img class="logo2" src="<%= x.strTeamBadge %>" draggable="false"><%= x.strTeam %></td>
+                            <td><%= x.intSpiele %></td>
+                            <td><%= x.intSiege %></td>
+                            <td><%= x.intUnentschieden %></td>
+                            <td><%= x.intNiederlagen %></td>
+                            <td><%= x.intTore %></td>
+                            <td><%= x.intTordifferenz %></td>
+                            <td><%= x.intPunkte %></td>
+                            <td><%= x.strLetzteFuenf %></td>
+                        </tr>
+                    <%
+                        i++;
+                    }
+                    %>
+                </table>
+            </div>
+        </div>
+        <div class="statistiken">
+            <div class="overlap-group-wrapper">
+                <div class="overlap-3">
+                    <div class="text-wrapper-27">Durchschnitts-Bewertung</div>
+                    <div class="div-2">
+                        <div class="div-3">
+                            <div class="text-wrapper-28">Matthias Seidl</div>
+                            <div class="overlap-group-2">
+                                <div class="text-wrapper-29">6</div>
+                            </div>
+                        </div>
+                        <div class="div-4">
+                            <div class="text-wrapper-28">Fally Mayulu</div>
+                            <div class="overlap-group-2">
+                                <div class="text-wrapper-29">8</div>
+                            </div>
+                        </div>
+                        <div class="div-5">
+                            <div class="text-wrapper-28">Marco Grüll</div>
+                            <div class="overlap-group-2">
+                                <div class="text-wrapper-29">8</div>
+                            </div>
+                        </div>
+                        <div class="div-6">
+                            <div class="text-wrapper-28">Guido Burgstaller</div>
+                            <div class="overlap-group-2">
+                                <div class="text-wrapper-29">9</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="torvorlagenliste">
+                <div class="overlap-3">
+                    <div class="text-wrapper-27">Torvorlagen</div>
+                    <div class="div-2">
+                        <div class="div-3">
+                            <div class="text-wrapper-28">Matthias Seidl</div>
+                            <div class="overlap-group-2">
+                                <div class="text-wrapper-29">6</div>
+                            </div>
+                        </div>
+                        <div class="div-4">
+                            <div class="text-wrapper-28">Fally Mayulu</div>
+                            <div class="overlap-group-2">
+                                <div class="text-wrapper-29">8</div>
+                            </div>
+                        </div>
+                        <div class="div-5">
+                            <div class="text-wrapper-28">Marco Grüll</div>
+                            <div class="overlap-group-2">
+                                <div class="text-wrapper-29">8</div>
+                            </div>
+                        </div>
+                        <div class="div-6">
+                            <div class="text-wrapper-28">Guido Burgstaller</div>
+                            <div class="overlap-group-2">
+                                <div class="text-wrapper-29">9</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="torschtzenliste">
+                <div class="overlap-3">
+                    <div class="text-wrapper-27">Torschützenliste</div>
+                    <div class="div-2">
+                        <div class="div-3">
+                            <div class="text-wrapper-28">Matthias Seidl</div>
+                            <div class="overlap-group-2">
+                                <div class="text-wrapper-29">6</div>
+                            </div>
+                        </div>
+                        <div class="div-4">
+                            <div class="text-wrapper-28">Fally Mayulu</div>
+                            <div class="overlap-group-2">
+                                <div class="text-wrapper-29">8</div>
+                            </div>
+                        </div>
+                        <div class="div-5">
+                            <div class="text-wrapper-28">Marco Grüll</div>
+                            <div class="overlap-group-2">
+                                <div class="text-wrapper-29">8</div>
+                            </div>
+                        </div>
+                        <div class="div-6">
+                            <div class="text-wrapper-28">Guido Burgstaller</div>
+                            <div class="overlap-group-2">
+                                <div class="text-wrapper-29">9</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-wrapper-4">Statistiken</div>
+        </div>
+    </div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/liga.js"></script>
+</body>
+</html>
