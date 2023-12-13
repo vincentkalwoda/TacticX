@@ -505,16 +505,13 @@ html, body {
 
 .frame .match {
     position: relative;
-    margin-top: 25px;
+    margin-top: 23px;
     width: 990px;
     height: 147px;
     background-color: #242433;
     border-radius: 30px;
 }
 
-.frame .match:first-child {
-    margin-top: 52px;
-}
 
 .frame .group {
     position: absolute;
@@ -779,10 +776,7 @@ html, body {
 }
 
 .frame .matches-text {
-    position: absolute;
     width: 134px;
-    top: 0;
-    left: 0;
     font-family: "Roboto", Helvetica, serif;
     font-weight: 700;
     color: #ffffff;
@@ -1007,10 +1001,6 @@ label {
     height: 140px;
     background-color: #242433;
     border-radius: 30px;
-}
-
-.frame .match:first-child {
-    margin-top: 52px;
 }
 
 .spiel_info {

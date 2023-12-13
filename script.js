@@ -6,6 +6,8 @@ const {response} = require("express");
 const app = express();
 const bcrypt = require("bcrypt")
 const ejs = require('ejs');
+const apiKey = "60130162"
+let playerData;
 
 app.set('view engine', 'ejs');
 
@@ -73,24 +75,111 @@ app.post('/auth2', function(request, response) {
     let username = request.body.username;
     let password = request.body.password;
     if (username && password) {
-            connection.query('SELECT * FROM users WHERE username = ? AND password = ?', [username, password], function(error, results, fields) {
-                if (error) throw error;
-                if (results.length > 0) {
-                    response.send('User existiert bereits.')
-                } else {
-                    connection.query('INSERT INTO users (username, password) VALUES (?, ?)', [username, password], (error, results, fields) => {
-                        if (error) {
-                            console.error('Error executing query:', error);
-                        } else {
-                            console.log('User inserted successfully');
-                        }
-                    });
-                    response.redirect("/")
+        connection.query('SELECT * FROM users WHERE username = ? AND password = ?', [username, password], function (error, results, fields) {
+            if (error) throw error;
+            if (results.length > 0) {
+                response.send('User existiert bereits.')
+            } else {
+                connection.query('INSERT INTO users (username, password) VALUES (?, ?)', [username, password], (error, results, fields) => {
+                    if (error) {
+                        console.error('Error executing query:', error);
+                    } else {
+                        console.log('User inserted successfully');
+                    }
+                });
+                response.redirect("/")
 
+            }
+            response.end();
+        });
+
+    } else {
+        response.send('Please enter Username and Password!');
+        response.end();
+    }
+});
+
+//SelectTeam Datenbank
+app.post('/selectTeam', async function (request, response) {
+    await loadPlayerData();
+    let league = request.body.ligaDropdown;
+    let team = request.body.teamDropdown;
+    let username = request.session.username;
+    if (league && team) {
+        const apiresponse = await fetch(`https://www.thesportsdb.com/api/v1/json/${apiKey}/lookup_all_players.php?id=${team}`);
+        const data = await apiresponse.json();
+        const spieler = JSON.stringify(data.player);
+
+        const apiresponse2 = await fetch(`https://www.thesportsdb.com/api/v1/json/${apiKey}/lookup_all_teams.php?id=${league}`);
+        const data2 = await apiresponse2.json();
+        const teams = JSON.stringify(data2.teams);
+        let players = []
+        for (const x of data2.teams) {
+            const apiresponse3 = await fetch(`https://www.thesportsdb.com/api/v1/json/${apiKey}/lookup_all_players.php?id=${x.idTeam}`);
+            const data3 = await apiresponse3.json();
+            for (const y of data3.player)
+                players.push(y)
+        }
+
+        const apiresponse3 = await fetch(`https://www.thesportsdb.com/api/v1/json/${apiKey}/eventsseason.php?id=${league}&s=2023-2024`);
+        const data3 = await apiresponse3.json();
+        let kalendar = data3.events;
+        kalendar.sort((x, y) => x.intRound - y.intRound);
+        kalendar = JSON.stringify(kalendar)
+
+        let tabelle = []
+        for (const x of data2.teams) {
+            tabelle.push({
+                id: x.idTeam,
+                strTeam: x.strTeam,
+                strTeamBadge: x.strTeamBadge,
+                intSpiele: 0,
+                intSiege: 0,
+                intUnentschieden: 0,
+                intNiederlagen: 0,
+                intTore: 0,
+                intTordifferenz: 0,
+                intPunkte: 0,
+                strLetzteFuenf: ""
+            })
+        }
+        tabelle = JSON.stringify(tabelle);
+
+        function normalizeString(str) {
+            return str
+                .replace(/[ä]/g, 'a')
+                .replace(/[ü]/g, 'u')
+                .replace(/[ö]/g, 'o');
+        }
+
+        for (let x = 0; x < players.length; x++) {
+            for (const y of playerData) {
+                if (players[x].strPlayer.includes(normalizeString(y.short_name)) || players[x].strPlayer.includes(normalizeString(y.long_name))) {
+                    console.log("b")
+                    players[x] = {
+                        idPlayer: players[x].idPlayer,
+                        idTeam: players[x].idTeam,
+                        idTeam2: players[x].idTeam2,
+                        strNationality: players[x].strNationality,
+                        strPlayer: players[x].strPlayer,
+                        strTeam: players[x].strTeam,
+                        strNumber: players[x].strNumber,
+                        strCutout: players[x].strCutout,
+                        strPosition: players[x].strPosition,
+                        intRating: y.overall
+                    };
                 }
-                response.end();
-            });
+            }
+        }
 
+
+        players = JSON.stringify(players)
+        connection.query('UPDATE users set leagueID = ?, teamID = ?, spieler = ?, kalendar = ?, tabelle = ?, teams = ?, players = ?  WHERE username = ?', [league, team, spieler, kalendar, tabelle, teams, players, username], function (error, results, fields) {
+            if (error) throw error;
+            else
+                response.redirect('/dashboard');
+            response.end();
+        });
     } else {
         response.send('Please enter Username and Password!');
         response.end();
@@ -108,17 +197,119 @@ app.get('/register', (request, response) => {
 });
 
 //Dashboard HTMl
-app.get('/dashboard', function(request, response) {
+app.get('/dashboard', async function (request, response) {
     if (request.session.loggedin) {
-        const username = request.session.username;
-        loadUserData(username, function (userData) {
-            if (userData)
-                response.render('index', userData)
-        })
+        try {
+            const username = request.session.username;
+            await loadUserData(username, function (userData) {
+                if (userData)
+                    response.render('index', userData);
+            });
 
-    } else
+        } catch (error) {
+            console.error('Error loading data:', error);
+            response.status(500).send('Internal Server Error');
+        }
+    } else {
         response.redirect('/login');
+    }
 });
+
+app.get('/liga', async function (request, response) {
+    if (request.session.loggedin) {
+        try {
+            const username = request.session.username;
+            await loadUserData(username, function (userData) {
+                if (userData)
+                    response.render('liga', userData);
+            });
+
+        } catch (error) {
+            console.error('Error loading data:', error);
+            response.status(500).send('Internal Server Error');
+        }
+    } else {
+        response.redirect('/login');
+    }
+});
+
+app.post('/getDashboard', async function (request, response) {
+    if (request.session.loggedin) {
+        response.redirect('/dashboard')
+    } else {
+        response.redirect('/login')
+    }
+})
+
+
+app.post('/getLiga', async function (request, response) {
+    if (request.session.loggedin) {
+        response.redirect('/liga')
+    } else {
+        response.redirect('/login')
+    }
+})
+
+app.get('/verein', async function (request, response) {
+    if (request.session.loggedin) {
+        try {
+            const username = request.session.username;
+            await loadUserData(username, function (userData) {
+                if (userData)
+                    response.render('verein', userData);
+            });
+
+        } catch (error) {
+            console.error('Error loading data:', error);
+            response.status(500).send('Internal Server Error');
+        }
+    } else {
+        response.redirect('/login');
+    }
+});
+
+app.post('/getVerein', async function (request, response) {
+    if (request.session.loggedin) {
+        response.redirect('/verein')
+    } else {
+        response.redirect('/login')
+    }
+})
+
+app.get('/marktplatz', async function (request, response) {
+    if (request.session.loggedin) {
+        try {
+            const username = request.session.username;
+            await loadUserData(username, function (userData) {
+                if (userData)
+                    response.render('marktplatz', userData);
+            });
+
+        } catch (error) {
+            console.error('Error loading data:', error);
+            response.status(500).send('Internal Server Error');
+        }
+    } else {
+        response.redirect('/login');
+    }
+});
+
+app.post('/getMarktplatz', async function (request, response) {
+    if (request.session.loggedin) {
+        response.redirect('/marktplatz')
+    } else {
+        response.redirect('/login')
+    }
+})
+
+app.post('/teamInfo', (req, res) => {
+    const idTeam = req.body.teamId;  // Assuming you're using bodyParser or a similar middleware
+
+    // Render your EJS template and pass the value to it
+    res.render('index', {idTeam});
+});
+
+
 
 function loadUserData(username, callback) {
     connection.query('SELECT * FROM users WHERE username = ?', [username], function (error, results, fields) {
@@ -128,12 +319,20 @@ function loadUserData(username, callback) {
             let userData = null;
             if (results.length > 0) {
                 userData = {
-                    teamID: results[0].teamID,
-                    teams: JSON.parse(results[0].teams),
-                    kalendar: JSON.parse(results[0].kalendar),
-                    spieltag: results[0].spieltag,
+                    username: username,
+                    coins: results[0].coins,
                     datum: results[0].datum,
-                    username: username
+                    leagueID: results[0].leagueID,
+                    saison: results[0].saison,
+                    teamID: results[0].teamID,
+                    spieltag: results[0].spieltag,
+                    formation: results[0].formation,
+                    aufstellung: results[0].aufstellung,
+                    spieler: JSON.parse(results[0].aufstellung),
+                    kalendar: JSON.parse(results[0].kalendar),
+                    tabelle: JSON.parse(results[0].tabelle),
+                    teams: JSON.parse(results[0].teams),
+                    players: JSON.parse(results[0].players)
                 };
             }
             callback(userData);
@@ -141,8 +340,14 @@ function loadUserData(username, callback) {
     });
 }
 
-
-
-
+function loadPlayerData() {
+    connection.query('SELECT * FROM player_data', [], function (error, results, fields) {
+        if (error) {
+            throw error;
+        } else {
+            playerData = results;
+        }
+    });
+}
 
 app.listen(3000);
