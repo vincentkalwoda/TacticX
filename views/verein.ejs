@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+    <link rel="stylesheet" href="../css/verein.css"/>
+</head>
+<body>
+<div class="frame">
+    <div class="div">
+        <div class="links">
+            <div class="overlap">
+                <div class="links-bg"></div>
+                <div class="sidebar">
+                    <a class="marktplatz" draggable="false">
+                        <img class="img" src="https://c.animaapp.com/buYDRGhc/img/marktplatz-icon.svg"/>
+                        <div class="text-wrapper">Marktplatz</div>
+                    </a>
+                    <div class="div-wrapper">
+                        <a class="verein" draggable="false">
+                            <img class="img" src="https://c.animaapp.com/zVU42ymC/img/ri-team-fill.svg"/>
+                            <div class="verein-text">Verein</div>
+                        </a>
+                    </div>
+                    <a class="group-4 liga" draggable="false">
+                        <img class="img" src="https://c.animaapp.com/zVU42ymC/img/ph-soccer-ball-fill.svg"/>
+                        <div class="text-wrapper">Liga</div>
+                    </a>
+                    <a class="dashboard" draggable="false">
+                        <img class="dashboard-icon"
+                             src="https://c.animaapp.com/WIUSBDf6/img/material-symbols-dashboard.svg"/>
+                        <div class="dashboard-text">Dashboard</div>
+                    </a>
+                </div>
+                <div class="profile" draggable="false">
+                    <div class="overlap-2">
+                        <img class="logo" alt="logo" width="512" src="../assets/imgs/logo.png" draggable="false">
+                        <div class="level">
+                            <div class="level-text-wrapper">
+                                <div class="level-text">TacticX</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="einstellungen" draggable="false">
+                    <img class="einstellungen-icon"
+                         src="https://c.animaapp.com/buYDRGhc/img/einstellungen-icon.svg"/>
+                    <div class="einstellungen-text">Einstellungen</div>
+                </a>
+            </div>
+        </div>
+        <div class="group-8">
+            <div class="overlap-2">
+
+                <div class="group-23">
+                    <div class="ellipse"></div>
+                    <div class="text-wrapper-12">Viktor</div>
+                </div>
+                <div class="group-24">
+                    <div class="overlap-3">
+                        <div class="group-9">
+                            <div class="text-wrapper-4">Deine Spieler</div>
+                            <div class="tabelle">
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th>POS</th>
+                                        <th>NAT</th>
+                                        <th>Rating</th>
+                                        <th>Spieler</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <%
+                                    const rest = spieler.filter(x => !aufstellung.some(y => y.idPlayer === x.idPlayer));
+
+                                            for (const y of rest) {
+                                            for (const x of players) {
+                                    if (x.idPlayer === y.idPlayer) {
+                                            for (const z of countries) {
+                                    if (z.name === x.strNationality) {
+                                    %>
+                                        <tr class="spieler">
+                                            <td><%= x.strPosition %></td>
+                                            <td><img src="<%= z.flags.svg %>" width="30px"></td>
+                                            <td><%= x.intRating %></td>
+                                            <td><%= x.strPlayer %></td>
+                                            <td>6</td>
+                                        </tr>
+                                    <%
+                                    }
+                                    }
+                                    }
+                                    }
+                                    }
+                                    %>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="text-wrapper-13">Dein Team</div>
+
+                        <div class="overlap-4">
+                            <div class="rectangle"></div>
+                            <img class="group-27" src="https://c.animaapp.com/zVU42ymC/img/group-54.png"/>
+                        </div>
+                        <div class="group-28">
+                            <div class="group-29">
+                                <div class="overlap-group-3">
+                                    <div class="text-wrapper-14">4-3-3</div>
+                                </div>
+                            </div>
+                            <div class="group-30">
+                                <div class="overlap-5">
+                                    <div class="text-wrapper-15">4-3-2-1</div>
+                                </div>
+                            </div>
+                            <div class="group-31">
+                                <div class="overlap-5">
+                                    <div class="text-wrapper-14">4-4-2</div>
+                                </div>
+                            </div>
+                            <div class="group-32">
+                                <div class="overlap-5">
+                                    <div class="text-wrapper-15">4-2-3-1</div>
+                                </div>
+                            </div>
+                            <div class="group-33">
+                                <div class="overlap-5">
+                                    <div class="text-wrapper-15">4-1-4-1</div>
+                                </div>
+                            </div>
+                            <div class="group-34">
+                                <div class="overlap-5">
+                                    <div class="text-wrapper-14">3-4-3</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group-35">
+                            <%
+                            let strKitColour1;
+                            for (const x of teams) {
+                                if (x.idTeam === teamID) {
+                                    strKitColour1 = x.strKitColour1;
+                                }
+                            }
+                            %>
+                            <div class="row">
+                                <%
+                                for(const x of aufstellung) {
+                                if(x.positionOnField >= 9) {
+                                        for(const y of players) {
+                                if(x.idPlayer === y.idPlayer) {
+                                %>
+                                    <div id="<%= x.positionOnField %>" class="col-sm-4 d-flex justify-content-center">
+                                        <div class="group-40">
+                                            <div class="overlap-7">
+                                                <div class="text-wrapper-16"><%= y.strPlayer %></div>
+                                                <div class="TW"><%= y.strPosition %></div>
+                                            </div>
+                                            <div class="mingcute-t-shirt">
+                                                <div class="group-38">
+                                                    <div class="overlap-group-5">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="team-svg"
+                                                             viewBox="-2 0 66 56" fill="none">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                  d="M13.2354 2.78012C14.9697 1.04529 17.3221 0.0703912 19.7752 0.0698673C22.211 0.0698673 25.7815 -0.608466 26.873 2.26212C27.3181 3.43084 28.1078 4.43672 29.1375 5.14643C30.1672 5.85615 31.3883 6.23619 32.6389 6.23619C33.8894 6.23619 35.1105 5.85615 36.1402 5.14643C37.1699 4.43672 37.9596 3.43084 38.4047 2.26212C39.4962 -0.605383 43.0698 0.0729504 45.5025 0.0729504C47.9541 0.0734738 50.3051 1.04717 52.0392 2.78012L63.4722 14.21C64.6283 15.3665 65.2777 16.9347 65.2777 18.5699C65.2777 20.205 64.6283 21.7733 63.4722 22.9297L58.915 27.4869C57.3117 29.0902 55.0732 29.6113 53.0567 29.1087L53.8954 45.8574C53.958 47.1094 53.7656 48.3611 53.3296 49.5365C52.8937 50.7119 52.2234 51.7864 51.3594 52.6947C50.4955 53.6031 49.4559 54.3263 48.3039 54.8206C47.1518 55.3148 45.9113 55.5698 44.6577 55.5699H20.62C19.3664 55.5698 18.1259 55.3148 16.9738 54.8206C15.8218 54.3263 14.7822 53.6031 13.9183 52.6947C13.0543 51.7864 12.384 50.7119 11.9481 49.5365C11.5121 48.3611 11.3197 47.1094 11.3823 45.8574L12.221 29.1087C11.1877 29.3686 10.1045 29.3558 9.07764 29.0715C8.05073 28.7873 7.11523 28.2412 6.36268 27.4869L1.80552 22.9297C0.649445 21.7733 0 20.205 0 18.5699C0 16.9347 0.649445 15.3665 1.80552 14.21L13.2354 2.78012Z"
+                                                                  fill="<%= strKitColour1 %>"/>
+                                                        </svg>
+                                                        <div class="text-wrapper-18"><%= y.strNumber %></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                <%
+                                }
+                                }
+
+                                }
+                                }
+                                %>
+                            </div>
+                            <div class="row">
+                                <%
+                                for(const x of aufstellung) {
+                                if(x.positionOnField >= 6 && x.positionOnField <= 8) {
+                                        for(const y of players) {
+                                if(x.idPlayer === y.idPlayer) {
+                                %>
+                                    <div id="<%= x.positionOnField %>" class="col-sm-4 d-flex justify-content-center">
+                                        <div class="group-40">
+                                            <div class="overlap-7">
+                                                <div class="text-wrapper-16"><%= y.strPlayer %></div>
+                                                <div class="TW"><%= y.strPosition %></div>
+                                            </div>
+                                            <div class="mingcute-t-shirt">
+                                                <div class="group-38">
+                                                    <div class="overlap-group-5">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="team-svg"
+                                                             viewBox="-2 0 66 56" fill="none">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                  d="M13.2354 2.78012C14.9697 1.04529 17.3221 0.0703912 19.7752 0.0698673C22.211 0.0698673 25.7815 -0.608466 26.873 2.26212C27.3181 3.43084 28.1078 4.43672 29.1375 5.14643C30.1672 5.85615 31.3883 6.23619 32.6389 6.23619C33.8894 6.23619 35.1105 5.85615 36.1402 5.14643C37.1699 4.43672 37.9596 3.43084 38.4047 2.26212C39.4962 -0.605383 43.0698 0.0729504 45.5025 0.0729504C47.9541 0.0734738 50.3051 1.04717 52.0392 2.78012L63.4722 14.21C64.6283 15.3665 65.2777 16.9347 65.2777 18.5699C65.2777 20.205 64.6283 21.7733 63.4722 22.9297L58.915 27.4869C57.3117 29.0902 55.0732 29.6113 53.0567 29.1087L53.8954 45.8574C53.958 47.1094 53.7656 48.3611 53.3296 49.5365C52.8937 50.7119 52.2234 51.7864 51.3594 52.6947C50.4955 53.6031 49.4559 54.3263 48.3039 54.8206C47.1518 55.3148 45.9113 55.5698 44.6577 55.5699H20.62C19.3664 55.5698 18.1259 55.3148 16.9738 54.8206C15.8218 54.3263 14.7822 53.6031 13.9183 52.6947C13.0543 51.7864 12.384 50.7119 11.9481 49.5365C11.5121 48.3611 11.3197 47.1094 11.3823 45.8574L12.221 29.1087C11.1877 29.3686 10.1045 29.3558 9.07764 29.0715C8.05073 28.7873 7.11523 28.2412 6.36268 27.4869L1.80552 22.9297C0.649445 21.7733 0 20.205 0 18.5699C0 16.9347 0.649445 15.3665 1.80552 14.21L13.2354 2.78012Z"
+                                                                  fill="<%= strKitColour1 %>"/>
+                                                        </svg>
+                                                        <div class="text-wrapper-18"><%= y.strNumber %></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <%
+                                }
+                                }
+
+                                }
+                                }
+                                %>
+                            </div>
+                            <div class="row">
+                                <%
+                                for(const x of aufstellung) {
+                                if(x.positionOnField >= 2 && x.positionOnField <= 5) {
+                                        for(const y of players) {
+                                if(x.idPlayer === y.idPlayer) {
+                                %>
+                                    <div id="<%= x.positionOnField %>" class="col-sm-3 d-flex justify-content-center">
+                                        <div class="group-40">
+                                            <div class="overlap-7">
+
+                                                <div class="TW"><%= y.strPosition %></div>
+                                                <div class="text-wrapper-16"><%= y.strPlayer %></div>
+                                            </div>
+                                            <div class="mingcute-t-shirt">
+                                                <div class="group-38">
+                                                    <div class="overlap-group-5">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="team-svg"
+                                                             viewBox="-2 0 66 56" fill="none">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                  d="M13.2354 2.78012C14.9697 1.04529 17.3221 0.0703912 19.7752 0.0698673C22.211 0.0698673 25.7815 -0.608466 26.873 2.26212C27.3181 3.43084 28.1078 4.43672 29.1375 5.14643C30.1672 5.85615 31.3883 6.23619 32.6389 6.23619C33.8894 6.23619 35.1105 5.85615 36.1402 5.14643C37.1699 4.43672 37.9596 3.43084 38.4047 2.26212C39.4962 -0.605383 43.0698 0.0729504 45.5025 0.0729504C47.9541 0.0734738 50.3051 1.04717 52.0392 2.78012L63.4722 14.21C64.6283 15.3665 65.2777 16.9347 65.2777 18.5699C65.2777 20.205 64.6283 21.7733 63.4722 22.9297L58.915 27.4869C57.3117 29.0902 55.0732 29.6113 53.0567 29.1087L53.8954 45.8574C53.958 47.1094 53.7656 48.3611 53.3296 49.5365C52.8937 50.7119 52.2234 51.7864 51.3594 52.6947C50.4955 53.6031 49.4559 54.3263 48.3039 54.8206C47.1518 55.3148 45.9113 55.5698 44.6577 55.5699H20.62C19.3664 55.5698 18.1259 55.3148 16.9738 54.8206C15.8218 54.3263 14.7822 53.6031 13.9183 52.6947C13.0543 51.7864 12.384 50.7119 11.9481 49.5365C11.5121 48.3611 11.3197 47.1094 11.3823 45.8574L12.221 29.1087C11.1877 29.3686 10.1045 29.3558 9.07764 29.0715C8.05073 28.7873 7.11523 28.2412 6.36268 27.4869L1.80552 22.9297C0.649445 21.7733 0 20.205 0 18.5699C0 16.9347 0.649445 15.3665 1.80552 14.21L13.2354 2.78012Z"
+                                                                  fill="<%= strKitColour1 %>"/>
+                                                        </svg>
+                                                        <div class="text-wrapper-18"><%= y.strNumber %></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <%
+                                }
+                                }
+
+                                }
+                                }
+                                %>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4"></div>
+                                <%
+                                for(const x of aufstellung) {
+                                if(x.positionOnField === 1) {
+                                        for(const y of players) {
+                                if(x.idPlayer === y.idPlayer) {
+                                %>
+                                    <div id="<%= x.positionOnField %>" class="col-sm-4 d-flex justify-content-center">
+                                        <div class="group-40">
+                                            <div class="overlap-7">
+                                                <div class="text-wrapper-16"><%= y.strPlayer %></div>
+                                                <div class="TW"><%= y.strPosition %></div>
+                                            </div>
+                                            <div class="mingcute-t-shirt">
+                                                <div class="group-38">
+                                                    <div class="overlap-group-5">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="team-svg"
+                                                             viewBox="-2 0 66 56" fill="none">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                  d="M13.2354 2.78012C14.9697 1.04529 17.3221 0.0703912 19.7752 0.0698673C22.211 0.0698673 25.7815 -0.608466 26.873 2.26212C27.3181 3.43084 28.1078 4.43672 29.1375 5.14643C30.1672 5.85615 31.3883 6.23619 32.6389 6.23619C33.8894 6.23619 35.1105 5.85615 36.1402 5.14643C37.1699 4.43672 37.9596 3.43084 38.4047 2.26212C39.4962 -0.605383 43.0698 0.0729504 45.5025 0.0729504C47.9541 0.0734738 50.3051 1.04717 52.0392 2.78012L63.4722 14.21C64.6283 15.3665 65.2777 16.9347 65.2777 18.5699C65.2777 20.205 64.6283 21.7733 63.4722 22.9297L58.915 27.4869C57.3117 29.0902 55.0732 29.6113 53.0567 29.1087L53.8954 45.8574C53.958 47.1094 53.7656 48.3611 53.3296 49.5365C52.8937 50.7119 52.2234 51.7864 51.3594 52.6947C50.4955 53.6031 49.4559 54.3263 48.3039 54.8206C47.1518 55.3148 45.9113 55.5698 44.6577 55.5699H20.62C19.3664 55.5698 18.1259 55.3148 16.9738 54.8206C15.8218 54.3263 14.7822 53.6031 13.9183 52.6947C13.0543 51.7864 12.384 50.7119 11.9481 49.5365C11.5121 48.3611 11.3197 47.1094 11.3823 45.8574L12.221 29.1087C11.1877 29.3686 10.1045 29.3558 9.07764 29.0715C8.05073 28.7873 7.11523 28.2412 6.36268 27.4869L1.80552 22.9297C0.649445 21.7733 0 20.205 0 18.5699C0 16.9347 0.649445 15.3665 1.80552 14.21L13.2354 2.78012Z"
+                                                                  fill="<%= strKitColour1 %>"/>
+                                                        </svg>
+                                                        <div class="text-wrapper-18"><%= y.strNumber %></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <%
+                                }
+                                }
+
+                                }
+                                }
+                                %>
+                                <div class="col-sm-4"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rectangle-2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src='https://code.jquery.com/jquery-3.7.0.js'></script>
+<!-- Data Table JS -->
+<script src='https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js'></script>
+<script src='https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js'></script>
+<script src='https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js'></script>
+<script src="../js/verein.js"></script>
+</body>
+</html>
