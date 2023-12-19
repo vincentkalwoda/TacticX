@@ -204,6 +204,39 @@ html, body {
     border-color: #616161;
 }
 
+.frame .userinfo {
+    position: absolute;
+    width: 296px;
+    height: 99px;
+    top: 0;
+    right: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    overflow: hidden;
+}
+
+.frame .ellipse {
+    width: 50px;
+    height: 50px;
+    background: #4242a2;
+    border-radius: 25px;
+    margin-left: 15px;
+
+}
+
+.frame .text-wrapper-3 {
+    align-items: center;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #a1a1a1;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+    text-align: right;
+}
+
 .frame .overlap-3 {
     position: relative;
     height: 95px;
@@ -386,7 +419,7 @@ html, body {
     left: 0;
 }
 
-.frame .overlap-2 {
+.frame .overlap-23 {
     position: relative;
     width: 344px;
     height: 95px;
@@ -420,15 +453,42 @@ html, body {
 
 .frame .text-wrapper-4 {
     position: absolute;
-    top: 0;
-    left: 0;
-    font-family: "Roboto-Bold", Helvetica;
+    width: 300px;
+    height: 878px;
+    top: 128px;
+    left: 1096px;
+    font-family: "Roboto", Helvetica, serif;
     font-weight: 700;
     color: #ffffff;
     font-size: 20px;
     letter-spacing: 0;
     line-height: normal;
     white-space: nowrap;
+}
+
+.kommende-spiele {
+    margin-top: 10px;
+    width: 300px;
+    height: 835px;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.frame .overlap-group-23 {
+    position: relative;
+    width: 296px;
+    height: 147px;
+    background-color: #242433;
+    border-radius: 30px;
+}
+
+
+.spiel {
+    position: relative;
+    margin-top: 20px;
+    width: 302px;
+    height: 147px;
 }
 
 .frame .group-11 {
@@ -450,9 +510,6 @@ html, body {
 }
 
 .frame .text-wrapper-5 {
-    position: absolute;
-    top: 0;
-    left: 21px;
     font-family: "Roboto-Regular", Helvetica;
     font-weight: 400;
     color: #747474;
@@ -464,9 +521,7 @@ html, body {
 }
 
 .frame .text-wrapper-6 {
-    position: absolute;
-    top: 23px;
-    left: 0;
+    margin-top: 5px;
     font-family: "Roboto-Bold", Helvetica;
     font-weight: 700;
     color: #616161;
@@ -477,18 +532,9 @@ html, body {
     white-space: nowrap;
 }
 
-.frame .group-13 {
-    position: absolute;
-    width: 23px;
-    height: 19px;
-    top: 47px;
-    left: 138px;
-}
 
 .frame .text-wrapper-7 {
-    position: absolute;
-    top: 0;
-    left: 0;
+    padding-top: 50px;
     font-family: "Roboto-Bold", Helvetica;
     font-weight: 700;
     color: #ffffff;
@@ -664,7 +710,7 @@ html, body {
     position: absolute;
     width: 992px;
     height: 558px;
-    top: 96px;
+    top: 125px;
     left: 0;
 }
 
@@ -690,6 +736,9 @@ html, body {
     left: 0;
     background-color: #242433;
     border-radius: 30px;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
 }
 
 .frame .group-21 {
@@ -711,15 +760,16 @@ html, body {
 
 .frame .text-wrapper-10 {
     position: absolute;
-    width: 132px;
-    top: 4px;
-    left: 77px;
-    font-family: "Roboto-Bold", Helvetica;
+    width: 990px;
+    height: 289px;
+    bottom: -50px;
+    font-family: "Roboto", Helvetica, serif;
     font-weight: 700;
     color: #ffffff;
     font-size: 20px;
     letter-spacing: 0;
     line-height: normal;
+    white-space: nowrap;
 }
 
 .frame .text-wrapper-11 {
@@ -1107,19 +1157,19 @@ html, body {
 }
 
 .frame .statistiken {
-    position: absolute;
-    width: 991px;
-    height: 289px;
-    top: 692px;
-    left: 0;
+    margin-top: 10px;
+    width: 100%; /* Adjusted width to accommodate the three elements */
+    height: 231px;
+    display: flex;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .frame .overlap-group-wrapper {
-    position: absolute;
+    position: relative;
     width: 311px;
     height: 231px;
-    top: 58px;
-    left: 680px;
+    margin-right: 30px;
 }
 
 .frame .overlap-3 {
@@ -1146,23 +1196,24 @@ html, body {
 .frame .div-2 {
     position: absolute;
     width: 253px;
-    height: 139px;
-    top: 60px;
+    height: 155px;
+    top: 50px;
     left: 32px;
+    display: block;
+    overflow: hidden;
 }
 
 .frame .div-3 {
-    position: absolute;
+    position: relative;
     width: 257px;
     height: 25px;
-    top: 114px;
-    left: 0;
+    margin-top: 13px;
 }
 
 .frame .text-wrapper-28 {
     position: absolute;
-    top: 2px;
-    left: 0;
+    width: 220px;
+    overflow-x: hidden;
     font-family: "Roboto-SemiBold", Helvetica;
     font-weight: 600;
     color: #ffffff;
@@ -1180,12 +1231,13 @@ html, body {
     left: 228px;
     background-color: #4242a2;
     border-radius: 12.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .frame .text-wrapper-29 {
-    position: absolute;
-    top: 3px;
-    left: 8px;
     font-family: "Roboto-Regular", Helvetica;
     font-weight: 400;
     color: #ffffff;
@@ -1221,25 +1273,25 @@ html, body {
 }
 
 .frame .torvorlagenliste {
-    position: absolute;
+    position: relative;
     width: 311px;
     height: 231px;
-    top: 58px;
-    left: 340px;
+    margin-right: 20px;
 }
 
 .frame .torschtzenliste {
-    position: absolute;
+    position: relative;
     width: 311px;
     height: 231px;
-    top: 58px;
-    left: 0;
+    margin-right: 20px;
 }
 
 
 .tabelle {
     margin-top: 10px;
-    width: 100%;
+    width: 95%;
+    height: 100%;
+    overflow-y: auto;
 }
 
 .tabelle .active {
@@ -1275,4 +1327,45 @@ html, body {
 .tabelle .logo2 {
     width: 20px;
     margin-right: 10px;
+}
+
+
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #535361 #171720;
+}
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+    border: none;
+    outline: none;
+}
+
+*::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background-color: #171720;
+}
+
+*::-webkit-scrollbar-track:hover {
+    background-color: #171720;
+}
+
+*::-webkit-scrollbar-track:active {
+    background-color: #171720;
+}
+
+*::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #535361;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: #535361;
+}
+
+*::-webkit-scrollbar-thumb:active {
+    background-color: #535361;
 }
