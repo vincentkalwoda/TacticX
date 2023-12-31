@@ -963,6 +963,27 @@ label {
     bottom: 50%;
 }
 
+#date {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 17px;
+    text-align: left;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+}
+
+#next {
+    position: absolute;
+    top: 50px;
+    right: 450px;
+    color: #5F5FFF;
+}
+
 .btn {
     width: 100%;
 }
@@ -1125,7 +1146,7 @@ label {
     text-align: left;
 }
 
-.tabelle td:nth-child(9) {
+.tabelle td:nth-child(10) {
     font-weight: 700;
 }
 
@@ -1192,6 +1213,15 @@ label {
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+}
+
+#matchInfos #score {
+    font-size: 40px;
+    font-weight: 900;
+    color: white;
+    white-space: pre;
+    text-align: center;
+    margin: 0 10px; /* Adjust the margin as needed */
 }
 
 /* Firefox */

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
     <meta charset="utf-8"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
     <link rel="stylesheet" href="../css/verein.css"/>
+    <title>TacticX</title>
 </head>
 <body>
 <div class="frame">
@@ -15,28 +16,30 @@
                 <div class="links-bg"></div>
                 <div class="sidebar">
                     <a class="marktplatz" draggable="false">
-                        <img class="img" src="https://c.animaapp.com/buYDRGhc/img/marktplatz-icon.svg"/>
+                        <img class="img" src="https://c.animaapp.com/buYDRGhc/img/marktplatz-icon.svg" alt=""/>
                         <div class="text-wrapper">Marktplatz</div>
                     </a>
                     <div class="div-wrapper">
                         <a class="verein" draggable="false">
-                            <img class="img" src="https://c.animaapp.com/zVU42ymC/img/ri-team-fill.svg"/>
+                            <img class="img" src="https://c.animaapp.com/zVU42ymC/img/ri-team-fill.svg" alt=""/>
                             <div class="verein-text">Verein</div>
                         </a>
                     </div>
                     <a class="group-4 liga" draggable="false">
-                        <img class="img" src="https://c.animaapp.com/zVU42ymC/img/ph-soccer-ball-fill.svg"/>
+                        <img class="img" src="https://c.animaapp.com/zVU42ymC/img/ph-soccer-ball-fill.svg" alt=""/>
                         <div class="text-wrapper">Liga</div>
                     </a>
                     <a class="dashboard" draggable="false">
                         <img class="dashboard-icon"
-                             src="https://c.animaapp.com/WIUSBDf6/img/material-symbols-dashboard.svg"/>
+                             src="https://c.animaapp.com/WIUSBDf6/img/material-symbols-dashboard.svg" alt=""/>
                         <div class="dashboard-text">Dashboard</div>
                     </a>
                 </div>
                 <div class="profile" draggable="false">
                     <div class="overlap-2">
-                        <img class="logo" alt="logo" width="512" src="../assets/imgs/logo.png" draggable="false">
+                        <img class="logo" alt="logo" width="512"
+                             src="https://media.discordapp.net/attachments/1168601694670688397/1177183545630924810/Untitled-1-Recovered.png?ex=65967e9c&is=6584099c&hm=ec8262c9cdcee7d1f5db4ceb5a5bd3f5246355eb0fc7ddb9bd79fd9c6227b186&=&format=webp&quality=lossless&width=640&height=640"
+                             draggable="false">
                         <div class="level">
                             <div class="level-text-wrapper">
                                 <div class="level-text">TacticX</div>
@@ -44,11 +47,6 @@
                         </div>
                     </div>
                 </div>
-                <a class="einstellungen" draggable="false">
-                    <img class="einstellungen-icon"
-                         src="https://c.animaapp.com/buYDRGhc/img/einstellungen-icon.svg"/>
-                    <div class="einstellungen-text">Einstellungen</div>
-                </a>
             </div>
         </div>
         <div class="group-8">
@@ -63,12 +61,12 @@
                         <div class="group-9">
                             <div class="text-wrapper-4">Deine Spieler</div>
                             <div class="tabelle">
-                                <table>
+                                <table id="rest">
                                     <thead>
                                     <tr>
-                                        <th>POS</th>
+                                        <th onclick="sortTable(0)">POS</th>
                                         <th>NAT</th>
-                                        <th>Rating</th>
+                                        <th onclick="sortTable2(2)">Rating</th>
                                         <th>Spieler</th>
                                         <th>Status</th>
                                     </tr>
@@ -76,23 +74,28 @@
                                     <tbody>
                                     <%
                                     const rest = spieler.filter(x => !aufstellung.some(y => y.idPlayer === x.idPlayer));
-
+                                    let flag = ""
                                             for (const y of rest) {
                                             for (const x of players) {
                                     if (x.idPlayer === y.idPlayer) {
+                                        if (x.strNationality === "England") flag = "https://flagcdn.com/gb.svg"
+                                        else {
                                             for (const z of countries) {
                                     if (z.name === x.strNationality) {
+                                        flag = z.flags.svg
+                                    }
+                                            }
+                                        }
                                     %>
-                                        <tr class="spieler">
-                                            <td><%= x.strPosition %></td>
-                                            <td><img src="<%= z.flags.svg %>" width="30px"></td>
-                                            <td><%= x.intRating %></td>
-                                            <td><%= x.strPlayer %></td>
-                                            <td>6</td>
+                                    <tr class="spieler" id="<%= x.strNumber %>" draggable="true"
+                                        ondragstart="drag(event)">
+                                        <td id="position"><%= x.strPosition %></td>
+                                        <td><img id="flag" src="<%= flag %>" width="30px" alt=""></td>
+                                        <td id="rating"><%= x.intRating %></td>
+                                        <td id="name"><%= x.strPlayer %></td>
+                                        <td id="status"></td>
                                         </tr>
                                     <%
-                                    }
-                                    }
                                     }
                                     }
                                     }
@@ -106,7 +109,7 @@
 
                         <div class="overlap-4">
                             <div class="rectangle"></div>
-                            <img class="group-27" src="https://c.animaapp.com/zVU42ymC/img/group-54.png"/>
+                            <img class="group-27" src="https://c.animaapp.com/zVU42ymC/img/group-54.png" alt=""/>
                         </div>
                         <div class="group-28">
                             <div class="group-29">
@@ -150,151 +153,17 @@
                             }
                             %>
                             <div class="row">
-                                <%
-                                for(const x of aufstellung) {
-                                if(x.positionOnField >= 9) {
-                                        for(const y of players) {
-                                if(x.idPlayer === y.idPlayer) {
-                                %>
-                                    <div id="<%= x.positionOnField %>" class="col-sm-4 d-flex justify-content-center">
-                                        <div class="group-40">
-                                            <div class="overlap-7">
-                                                <div class="text-wrapper-16"><%= y.strPlayer %></div>
-                                                <div class="TW"><%= y.strPosition %></div>
-                                            </div>
-                                            <div class="mingcute-t-shirt">
-                                                <div class="group-38">
-                                                    <div class="overlap-group-5">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="team-svg"
-                                                             viewBox="-2 0 66 56" fill="none">
-                                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                  d="M13.2354 2.78012C14.9697 1.04529 17.3221 0.0703912 19.7752 0.0698673C22.211 0.0698673 25.7815 -0.608466 26.873 2.26212C27.3181 3.43084 28.1078 4.43672 29.1375 5.14643C30.1672 5.85615 31.3883 6.23619 32.6389 6.23619C33.8894 6.23619 35.1105 5.85615 36.1402 5.14643C37.1699 4.43672 37.9596 3.43084 38.4047 2.26212C39.4962 -0.605383 43.0698 0.0729504 45.5025 0.0729504C47.9541 0.0734738 50.3051 1.04717 52.0392 2.78012L63.4722 14.21C64.6283 15.3665 65.2777 16.9347 65.2777 18.5699C65.2777 20.205 64.6283 21.7733 63.4722 22.9297L58.915 27.4869C57.3117 29.0902 55.0732 29.6113 53.0567 29.1087L53.8954 45.8574C53.958 47.1094 53.7656 48.3611 53.3296 49.5365C52.8937 50.7119 52.2234 51.7864 51.3594 52.6947C50.4955 53.6031 49.4559 54.3263 48.3039 54.8206C47.1518 55.3148 45.9113 55.5698 44.6577 55.5699H20.62C19.3664 55.5698 18.1259 55.3148 16.9738 54.8206C15.8218 54.3263 14.7822 53.6031 13.9183 52.6947C13.0543 51.7864 12.384 50.7119 11.9481 49.5365C11.5121 48.3611 11.3197 47.1094 11.3823 45.8574L12.221 29.1087C11.1877 29.3686 10.1045 29.3558 9.07764 29.0715C8.05073 28.7873 7.11523 28.2412 6.36268 27.4869L1.80552 22.9297C0.649445 21.7733 0 20.205 0 18.5699C0 16.9347 0.649445 15.3665 1.80552 14.21L13.2354 2.78012Z"
-                                                                  fill="<%= strKitColour1 %>"/>
-                                                        </svg>
-                                                        <div class="text-wrapper-18"><%= y.strNumber %></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                <%
-                                }
-                                }
-
-                                }
-                                }
-                                %>
+                                <% renderPlayerCards(aufstellung, players, 9, 11, "col-sm-4") %>
                             </div>
                             <div class="row">
-                                <%
-                                for(const x of aufstellung) {
-                                if(x.positionOnField >= 6 && x.positionOnField <= 8) {
-                                        for(const y of players) {
-                                if(x.idPlayer === y.idPlayer) {
-                                %>
-                                    <div id="<%= x.positionOnField %>" class="col-sm-4 d-flex justify-content-center">
-                                        <div class="group-40">
-                                            <div class="overlap-7">
-                                                <div class="text-wrapper-16"><%= y.strPlayer %></div>
-                                                <div class="TW"><%= y.strPosition %></div>
-                                            </div>
-                                            <div class="mingcute-t-shirt">
-                                                <div class="group-38">
-                                                    <div class="overlap-group-5">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="team-svg"
-                                                             viewBox="-2 0 66 56" fill="none">
-                                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                  d="M13.2354 2.78012C14.9697 1.04529 17.3221 0.0703912 19.7752 0.0698673C22.211 0.0698673 25.7815 -0.608466 26.873 2.26212C27.3181 3.43084 28.1078 4.43672 29.1375 5.14643C30.1672 5.85615 31.3883 6.23619 32.6389 6.23619C33.8894 6.23619 35.1105 5.85615 36.1402 5.14643C37.1699 4.43672 37.9596 3.43084 38.4047 2.26212C39.4962 -0.605383 43.0698 0.0729504 45.5025 0.0729504C47.9541 0.0734738 50.3051 1.04717 52.0392 2.78012L63.4722 14.21C64.6283 15.3665 65.2777 16.9347 65.2777 18.5699C65.2777 20.205 64.6283 21.7733 63.4722 22.9297L58.915 27.4869C57.3117 29.0902 55.0732 29.6113 53.0567 29.1087L53.8954 45.8574C53.958 47.1094 53.7656 48.3611 53.3296 49.5365C52.8937 50.7119 52.2234 51.7864 51.3594 52.6947C50.4955 53.6031 49.4559 54.3263 48.3039 54.8206C47.1518 55.3148 45.9113 55.5698 44.6577 55.5699H20.62C19.3664 55.5698 18.1259 55.3148 16.9738 54.8206C15.8218 54.3263 14.7822 53.6031 13.9183 52.6947C13.0543 51.7864 12.384 50.7119 11.9481 49.5365C11.5121 48.3611 11.3197 47.1094 11.3823 45.8574L12.221 29.1087C11.1877 29.3686 10.1045 29.3558 9.07764 29.0715C8.05073 28.7873 7.11523 28.2412 6.36268 27.4869L1.80552 22.9297C0.649445 21.7733 0 20.205 0 18.5699C0 16.9347 0.649445 15.3665 1.80552 14.21L13.2354 2.78012Z"
-                                                                  fill="<%= strKitColour1 %>"/>
-                                                        </svg>
-                                                        <div class="text-wrapper-18"><%= y.strNumber %></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <%
-                                }
-                                }
-
-                                }
-                                }
-                                %>
+                                <% renderPlayerCards(aufstellung, players, 6, 8, "col-sm-4") %>
                             </div>
                             <div class="row">
-                                <%
-                                for(const x of aufstellung) {
-                                if(x.positionOnField >= 2 && x.positionOnField <= 5) {
-                                        for(const y of players) {
-                                if(x.idPlayer === y.idPlayer) {
-                                %>
-                                    <div id="<%= x.positionOnField %>" class="col-sm-3 d-flex justify-content-center">
-                                        <div class="group-40">
-                                            <div class="overlap-7">
-
-                                                <div class="TW"><%= y.strPosition %></div>
-                                                <div class="text-wrapper-16"><%= y.strPlayer %></div>
-                                            </div>
-                                            <div class="mingcute-t-shirt">
-                                                <div class="group-38">
-                                                    <div class="overlap-group-5">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="team-svg"
-                                                             viewBox="-2 0 66 56" fill="none">
-                                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                  d="M13.2354 2.78012C14.9697 1.04529 17.3221 0.0703912 19.7752 0.0698673C22.211 0.0698673 25.7815 -0.608466 26.873 2.26212C27.3181 3.43084 28.1078 4.43672 29.1375 5.14643C30.1672 5.85615 31.3883 6.23619 32.6389 6.23619C33.8894 6.23619 35.1105 5.85615 36.1402 5.14643C37.1699 4.43672 37.9596 3.43084 38.4047 2.26212C39.4962 -0.605383 43.0698 0.0729504 45.5025 0.0729504C47.9541 0.0734738 50.3051 1.04717 52.0392 2.78012L63.4722 14.21C64.6283 15.3665 65.2777 16.9347 65.2777 18.5699C65.2777 20.205 64.6283 21.7733 63.4722 22.9297L58.915 27.4869C57.3117 29.0902 55.0732 29.6113 53.0567 29.1087L53.8954 45.8574C53.958 47.1094 53.7656 48.3611 53.3296 49.5365C52.8937 50.7119 52.2234 51.7864 51.3594 52.6947C50.4955 53.6031 49.4559 54.3263 48.3039 54.8206C47.1518 55.3148 45.9113 55.5698 44.6577 55.5699H20.62C19.3664 55.5698 18.1259 55.3148 16.9738 54.8206C15.8218 54.3263 14.7822 53.6031 13.9183 52.6947C13.0543 51.7864 12.384 50.7119 11.9481 49.5365C11.5121 48.3611 11.3197 47.1094 11.3823 45.8574L12.221 29.1087C11.1877 29.3686 10.1045 29.3558 9.07764 29.0715C8.05073 28.7873 7.11523 28.2412 6.36268 27.4869L1.80552 22.9297C0.649445 21.7733 0 20.205 0 18.5699C0 16.9347 0.649445 15.3665 1.80552 14.21L13.2354 2.78012Z"
-                                                                  fill="<%= strKitColour1 %>"/>
-                                                        </svg>
-                                                        <div class="text-wrapper-18"><%= y.strNumber %></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <%
-                                }
-                                }
-
-                                }
-                                }
-                                %>
+                                <% renderPlayerCards(aufstellung, players, 2, 5, "col-sm-3") %>
                             </div>
                             <div class="row">
                                 <div class="col-sm-4"></div>
-                                <%
-                                for(const x of aufstellung) {
-                                if(x.positionOnField === 1) {
-                                        for(const y of players) {
-                                if(x.idPlayer === y.idPlayer) {
-                                %>
-                                    <div id="<%= x.positionOnField %>" class="col-sm-4 d-flex justify-content-center">
-                                        <div class="group-40">
-                                            <div class="overlap-7">
-                                                <div class="text-wrapper-16"><%= y.strPlayer %></div>
-                                                <div class="TW"><%= y.strPosition %></div>
-                                            </div>
-                                            <div class="mingcute-t-shirt">
-                                                <div class="group-38">
-                                                    <div class="overlap-group-5">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="team-svg"
-                                                             viewBox="-2 0 66 56" fill="none">
-                                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                                  d="M13.2354 2.78012C14.9697 1.04529 17.3221 0.0703912 19.7752 0.0698673C22.211 0.0698673 25.7815 -0.608466 26.873 2.26212C27.3181 3.43084 28.1078 4.43672 29.1375 5.14643C30.1672 5.85615 31.3883 6.23619 32.6389 6.23619C33.8894 6.23619 35.1105 5.85615 36.1402 5.14643C37.1699 4.43672 37.9596 3.43084 38.4047 2.26212C39.4962 -0.605383 43.0698 0.0729504 45.5025 0.0729504C47.9541 0.0734738 50.3051 1.04717 52.0392 2.78012L63.4722 14.21C64.6283 15.3665 65.2777 16.9347 65.2777 18.5699C65.2777 20.205 64.6283 21.7733 63.4722 22.9297L58.915 27.4869C57.3117 29.0902 55.0732 29.6113 53.0567 29.1087L53.8954 45.8574C53.958 47.1094 53.7656 48.3611 53.3296 49.5365C52.8937 50.7119 52.2234 51.7864 51.3594 52.6947C50.4955 53.6031 49.4559 54.3263 48.3039 54.8206C47.1518 55.3148 45.9113 55.5698 44.6577 55.5699H20.62C19.3664 55.5698 18.1259 55.3148 16.9738 54.8206C15.8218 54.3263 14.7822 53.6031 13.9183 52.6947C13.0543 51.7864 12.384 50.7119 11.9481 49.5365C11.5121 48.3611 11.3197 47.1094 11.3823 45.8574L12.221 29.1087C11.1877 29.3686 10.1045 29.3558 9.07764 29.0715C8.05073 28.7873 7.11523 28.2412 6.36268 27.4869L1.80552 22.9297C0.649445 21.7733 0 20.205 0 18.5699C0 16.9347 0.649445 15.3665 1.80552 14.21L13.2354 2.78012Z"
-                                                                  fill="<%= strKitColour1 %>"/>
-                                                        </svg>
-                                                        <div class="text-wrapper-18"><%= y.strNumber %></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <%
-                                }
-                                }
-
-                                }
-                                }
-                                %>
+                                <% renderPlayerCards(aufstellung, players, 1, 1, "col-sm-4") %>
                                 <div class="col-sm-4"></div>
                             </div>
                         </div>
@@ -305,11 +174,273 @@
         </div>
     </div>
 </div>
+
+<%
+function renderPlayerCards(aufstellung, players, start, end, columnClass) {
+    aufstellung.sort((x, y) => x.positionOnField - y.positionOnField);
+        for (const x of aufstellung) {
+if (x.positionOnField >= start && x.positionOnField <= end) {
+        for (const y of players) {
+    let flag
+if (x.idPlayer === y.idPlayer) {
+    if (y.strNationality === "England") flag = "https://flagcdn.com/gb.svg"
+    else {
+        for (const z of countries) {
+            if (z.name === y.strNationality) {
+                flag = z.flags.svg
+            }
+        }
+    }
+%>
+<div id="<%= x.positionOnField %>" class="<%= columnClass %> d-flex justify-content-center valid-drop-target"
+     ondrop="drop(event)" draggable="true" ondragstart="drag(event)" ondragover="allowDrop(event)">
+    <div class="group-40">
+        <div class="overlap-7">
+            <div class="text-wrapper-16" id="name"><%= y.strPlayer %></div>
+            <div class="TW" id="pos"><%= y.strPosition %></div>
+        </div>
+        <div class="mingcute-t-shirt">
+            <div class="group-38">
+                <div class="overlap-group-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="team-svg" viewBox="-2 0 66 56" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M13.2354 2.78012C14.9697 1.04529 17.3221 0.0703912 19.7752 0.0698673C22.211 0.0698673 25.7815 -0.608466 26.873 2.26212C27.3181 3.43084 28.1078 4.43672 29.1375 5.14643C30.1672 5.85615 31.3883 6.23619 32.6389 6.23619C33.8894 6.23619 35.1105 5.85615 36.1402 5.14643C37.1699 4.43672 37.9596 3.43084 38.4047 2.26212C39.4962 -0.605383 43.0698 0.0729504 45.5025 0.0729504C47.9541 0.0734738 50.3051 1.04717 52.0392 2.78012L63.4722 14.21C64.6283 15.3665 65.2777 16.9347 65.2777 18.5699C65.2777 20.205 64.6283 21.7733 63.4722 22.9297L58.915 27.4869C57.3117 29.0902 55.0732 29.6113 53.0567 29.1087L53.8954 45.8574C53.958 47.1094 53.7656 48.3611 53.3296 49.5365C52.8937 50.7119 52.2234 51.7864 51.3594 52.6947C50.4955 53.6031 49.4559 54.3263 48.3039 54.8206C47.1518 55.3148 45.9113 55.5698 44.6577 55.5699H20.62C19.3664 55.5698 18.1259 55.3148 16.9738 54.8206C15.8218 54.3263 14.7822 53.6031 13.9183 52.6947C13.0543 51.7864 12.384 50.7119 11.9481 49.5365C11.5121 48.3611 11.3197 47.1094 11.3823 45.8574L12.221 29.1087C11.1877 29.3686 10.1045 29.3558 9.07764 29.0715C8.05073 28.7873 7.11523 28.2412 6.36268 27.4869L1.80552 22.9297C0.649445 21.7733 0 20.205 0 18.5699C0 16.9347 0.649445 15.3665 1.80552 14.21L13.2354 2.78012Z"
+                              fill="<%= strKitColour1 %>"/>
+                    </svg>
+                    <div class="text-wrapper-18"><%= y.strNumber %></div>
+                </div>
+            </div>
+        </div>
+        <p id="rating"><%= y.intRating %></p>
+        <p id="flag"><%= flag %></p>
+    </div>
+</div>
+<%
+}
+}
+}
+}
+}
+%>
+
+<script>
+    var table = document.getElementById("rest");
+    var lastSortedColumn = -1;  // Track the last sorted column
+    var ascendingOrder = true;   // Track the sorting order
+
+    function sortTable2(columnIndex) {
+        var rows, switching, i, x, y, shouldSwitch;
+        switching = true;
+
+        while (switching) {
+            switching = false;
+            rows = table.rows;
+
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("td")[columnIndex];
+                y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+
+                var xValue = isNaN(parseFloat(x.textContent)) ? x.textContent : parseFloat(x.textContent);
+                var yValue = isNaN(parseFloat(y.textContent)) ? y.textContent : parseFloat(y.textContent);
+
+                if (ascendingOrder ? xValue > yValue : xValue < yValue) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+            }
+        }
+
+        // Toggle sorting order
+        if (lastSortedColumn === columnIndex) {
+            ascendingOrder = !ascendingOrder;
+        } else {
+            ascendingOrder = true;
+        }
+
+        // Update the last sorted column
+        lastSortedColumn = columnIndex;
+    }
+
+    // Assign onclick event to table headers
+    var headers = table.getElementsByTagName("th");
+    for (var i = 0; i < headers.length; i++) {
+        headers[i].addEventListener("click", function () {
+            var columnIndex = this.cellIndex;
+            sortTable2(columnIndex);
+        });
+    }
+
+    // Assign onclick event to table headers
+    var headers = table.getElementsByTagName("th");
+    for (var i = 0; i < headers.length; i++) {
+        headers[i].addEventListener("click", function () {
+            var columnIndex = this.cellIndex;
+            sortTable2(columnIndex);
+        });
+
+    }
+
+
+    var positions = {
+        'GK': 1,
+        'LB': 2,
+        'CB': [3, 4],
+        'RB': 5,
+        'LM': 6,
+        'CM': [6, 7, 8],
+        'RM': 8,
+        'CF': 10,
+        'LW': 9,
+        'ST': [9, 10, 11],
+        'RW': 11
+    };
+
+    table = document.getElementById("rest");
+    let sortOrder = -1; // 1 for ascending, -1 for descending
+
+    function sortTable(columnIndex) {
+        var rows, switching, i, x, y, shouldSwitch;
+        switching = true;
+
+        while (switching) {
+            switching = false;
+            rows = table.rows;
+
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+                x = rows[i].getElementsByTagName("td")[columnIndex];
+                y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+
+                var xPosition = x.textContent || x.innerText;
+                var yPosition = y.textContent || y.innerText;
+
+                var xNumber = getNumberForPosition(xPosition);
+                var yNumber = getNumberForPosition(yPosition);
+
+                if (sortOrder * xNumber > sortOrder * yNumber) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+            }
+        }
+
+        sortOrder = -sortOrder;
+    }
+
+    function getNumberForPosition(position) {
+        var positionNumbers = positions[position];
+        return Array.isArray(positionNumbers) ? positionNumbers[0] : positionNumbers;
+    }
+
+    // Assign onclick event to table header for sorting
+    var header = table.getElementsByTagName("th")[0];
+    header.addEventListener("click", function () {
+        sortTable(0);
+    });
+
+
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+
+    function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        var draggedElement = document.getElementById(data);
+
+        var targetElement = document.elementFromPoint(ev.clientX, ev.clientY);
+
+        // Find the nearest ancestor div element
+        var validDropTarget = targetElement.closest('.valid-drop-target');
+
+        // Check if a valid drop target is found
+        if (validDropTarget && draggedElement.className === "spieler") {
+            var playerRating = draggedElement.querySelector('#rating').innerText;
+            var playerName = draggedElement.querySelector('#name').innerText;
+            var playerPosition = draggedElement.querySelector('#position').innerText;
+            var playerNumber = draggedElement.id;
+            var playerFlag = draggedElement.querySelector('#flag').src;
+
+            // Create a new element with the desired structure
+            var newElement = document.createElement('div');
+            newElement.className = 'group-40';
+            newElement.innerHTML = `
+        <div class="overlap-7">
+            <div class="text-wrapper-16" id="name">${playerName}</div>
+            <div class="TW" id="pos">${playerPosition}</div>
+        </div>
+        <div class="mingcute-t-shirt">
+            <div class="group-38">
+                <div class="overlap-group-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="team-svg"
+                                                             viewBox="-2 0 66 56" fill="none">
+                                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                  d="M13.2354 2.78012C14.9697 1.04529 17.3221 0.0703912 19.7752 0.0698673C22.211 0.0698673 25.7815 -0.608466 26.873 2.26212C27.3181 3.43084 28.1078 4.43672 29.1375 5.14643C30.1672 5.85615 31.3883 6.23619 32.6389 6.23619C33.8894 6.23619 35.1105 5.85615 36.1402 5.14643C37.1699 4.43672 37.9596 3.43084 38.4047 2.26212C39.4962 -0.605383 43.0698 0.0729504 45.5025 0.0729504C47.9541 0.0734738 50.3051 1.04717 52.0392 2.78012L63.4722 14.21C64.6283 15.3665 65.2777 16.9347 65.2777 18.5699C65.2777 20.205 64.6283 21.7733 63.4722 22.9297L58.915 27.4869C57.3117 29.0902 55.0732 29.6113 53.0567 29.1087L53.8954 45.8574C53.958 47.1094 53.7656 48.3611 53.3296 49.5365C52.8937 50.7119 52.2234 51.7864 51.3594 52.6947C50.4955 53.6031 49.4559 54.3263 48.3039 54.8206C47.1518 55.3148 45.9113 55.5698 44.6577 55.5699H20.62C19.3664 55.5698 18.1259 55.3148 16.9738 54.8206C15.8218 54.3263 14.7822 53.6031 13.9183 52.6947C13.0543 51.7864 12.384 50.7119 11.9481 49.5365C11.5121 48.3611 11.3197 47.1094 11.3823 45.8574L12.221 29.1087C11.1877 29.3686 10.1045 29.3558 9.07764 29.0715C8.05073 28.7873 7.11523 28.2412 6.36268 27.4869L1.80552 22.9297C0.649445 21.7733 0 20.205 0 18.5699C0 16.9347 0.649445 15.3665 1.80552 14.21L13.2354 2.78012Z"
+                                                                  fill="<%= strKitColour1 %>"/>
+                                                        </svg>
+                                                        <div class="text-wrapper-18" >${playerNumber}</div>
+                </div>
+            </div>
+        </div>
+        <p id="rating">${playerRating}</p>
+        <p id="flag">${playerFlag}</p>
+    `;
+
+            let number = validDropTarget.querySelector('.text-wrapper-18').innerText;
+            let position = validDropTarget.querySelector('#pos').innerText;
+            let rating = validDropTarget.querySelector('#rating').innerText;
+            let flag = validDropTarget.querySelector('#flag').innerText;
+            let name = validDropTarget.querySelector('#name').innerText;
+            draggedElement.id = number;
+            draggedElement.innerHTML = `
+                <td id="position">${position}</td>
+                                            <td><img id="flag" src="${flag}" width="30px" alt=""></td>
+                                            <td id="rating">${rating}</td>
+                                            <td id="name">${name}</td>
+                                            <td id="status"></td>
+            `
+
+            validDropTarget.innerHTML = ""
+            validDropTarget.appendChild(newElement);
+
+        } else if (validDropTarget) {
+            var draggedElementHTML = draggedElement.innerHTML;
+            draggedElement.innerHTML = validDropTarget.innerHTML;
+            validDropTarget.innerHTML = draggedElementHTML;
+        }
+    }
+</script>
+
+<%
+if (teamID == null || leagueID == null) {
+%>
+    <script>location.href = '/dashboard'</script>
+
+<%
+}
+%>
+
 <script src='https://code.jquery.com/jquery-3.7.0.js'></script>
 <!-- Data Table JS -->
 <script src='https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js'></script>
 <script src='https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js'></script>
 <script src='https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js'></script>
-<script src="../js/verein.js"></script>
+<script src="../js/index.js"></script>
 </body>
 </html>

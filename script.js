@@ -8,11 +8,13 @@ const bcrypt = require("bcrypt")
 const ejs = require('ejs');
 const apiKey = "60130162"
 const stringSimilarity = require('string-similarity');
+const {json} = require("body-parser");
 
 let playerData;
 let aufstellung;
 
 app.set('view engine', 'ejs');
+app.use(json({limit: '10mb'}));
 
 const connection  = mysql.createConnection({
     host: 'localhost',
@@ -116,7 +118,9 @@ app.post('/selectTeam', async function (request, response) {
 
             const apiresponse2 = await fetch(`https://www.thesportsdb.com/api/v1/json/${apiKey}/lookup_all_teams.php?id=${league}`);
             const data2 = await apiresponse2.json();
-            const teams = JSON.stringify(data2.teams);
+            let teams = data2.teams
+
+
             let players = []
             for (const x of data2.teams) {
                 const apiresponse3 = await fetch(`https://www.thesportsdb.com/api/v1/json/${apiKey}/lookup_all_players.php?id=${x.idTeam}`);
@@ -145,7 +149,7 @@ app.post('/selectTeam', async function (request, response) {
             let tabelle = []
             for (const x of data2.teams) {
                 tabelle.push({
-                    id: x.idTeam,
+                    idTeam: x.idTeam,
                     strTeam: x.strTeam,
                     strTeamBadge: x.strTeamBadge,
                     intSpiele: 0,
@@ -153,6 +157,7 @@ app.post('/selectTeam', async function (request, response) {
                     intUnentschieden: 0,
                     intNiederlagen: 0,
                     intTore: 0,
+                    intGegentore: 0,
                     intTordifferenz: 0,
                     intPunkte: 0,
                     strLetzteFuenf: ""
@@ -205,7 +210,7 @@ app.post('/selectTeam', async function (request, response) {
                             intMatchesPlayed: 0,
                             intGoals: 0,
                             intAssists: 0,
-                            intAvgRating: 0
+                            intAvgRating: 6
                         };
                         status = true;
                     }
@@ -225,7 +230,7 @@ app.post('/selectTeam', async function (request, response) {
                         intMatchesPlayed: 0,
                         intGoals: 0,
                         intAssists: 0,
-                        intAvgRating: 75
+                        intAvgRating: 0
                     };
                 }
                 status = false;
@@ -254,8 +259,8 @@ app.post('/selectTeam', async function (request, response) {
 
             play.sort((x, y) => y.intRating - x.intRating);
 
-            let assignedPlayers = [];
-            let positionsCount = {};
+            const assignedPlayers = [];
+            const positionsCount = {};
 
             for (const player of play) {
                 const playerPositions = positions[player.strPosition];
@@ -274,18 +279,59 @@ app.post('/selectTeam', async function (request, response) {
                         positionsCount[playerPositions] = (positionsCount[playerPositions] || 0) + 1;
                     }
                 }
-
-                if (assignedPlayers.length === 11) {
-                    break;
-                }
+            }
+            for (let i = 0; i < assignedPlayers; i++) {
+                if (assignedPlayers[i].positionOnField === "undefined") assignedPlayers[i].positionOnField = i + 1;
             }
 
-            assignedPlayers.sort((x, y) => x.positionOnField - y.positionOnField)
+            assignedPlayers.sort((a, b) => a.positionOnField - b.positionOnField);
 
             aufstellung = JSON.stringify(assignedPlayers)
 
+
+            for (let j = 0; j < teams.length; j++) {
+                let play = [];
+                for (const x of players) {
+                    if (x.idTeam === teams[j].idTeam || x.idTeam2 === teams[j].idTeam) {
+                        play.push(x);
+                    }
+                }
+
+                play.sort((x, y) => y.intRating - x.intRating);
+
+                const assignedPlayers = [];
+                const positionsCount = {};
+
+                for (const player of play) {
+                    const playerPositions = positions[player.strPosition];
+
+                    if (Array.isArray(playerPositions)) {
+                        for (const pos of playerPositions) {
+                            if (!positionsCount[pos] || positionsCount[pos] < 1) {
+                                assignedPlayers.push({idPlayer: player.idPlayer, positionOnField: pos});
+                                positionsCount[pos] = (positionsCount[pos] || 0) + 1;
+                                break;
+                            }
+                        }
+                    } else {
+                        if (!positionsCount[playerPositions] || positionsCount[playerPositions] < 1) {
+                            assignedPlayers.push({idPlayer: player.idPlayer, positionOnField: playerPositions});
+                            positionsCount[playerPositions] = (positionsCount[playerPositions] || 0) + 1;
+                        }
+                    }
+                }
+                for (let i = 0; i < assignedPlayers; i++) {
+                    if (assignedPlayers[i].positionOnField === "undefined") assignedPlayers[i].positionOnField = i + 1;
+                }
+
+                assignedPlayers.sort((a, b) => a.positionOnField - b.positionOnField);
+                teams[j].strLocked = assignedPlayers;
+            }
+            teams = JSON.stringify(teams)
+
+
             players = JSON.stringify(players)
-            connection.query('UPDATE users set leagueID = ?, teamID = ?, aufstellung = ?, spieler = ?, kalendar = ?, tabelle = ?, teams = ?, players = ?  WHERE username = ?', [league, team, aufstellung, spieler, kalendar, tabelle, teams, players, username], function (error, results, fields) {
+            connection.query('UPDATE users set coins=?, leagueID = ?, teamID = ?, spieltag=?, aufstellung = ?, spieler = ?, kalendar = ?, tabelle = ?, teams = ?, players = ?  WHERE username = ?', [0, league, team, 1, aufstellung, spieler, kalendar, tabelle, teams, players, username], function (error, results, fields) {
                 if (error) throw error;
                 else
                     response.redirect('/dashboard');
@@ -422,6 +468,78 @@ app.post('/teamInfo', (req, res) => {
     // Render your EJS template and pass the value to it
     res.render('index', {idTeam});
 });
+
+
+app.post('/updateKalendar', (request, response) => {
+    const kalendar = JSON.stringify(request.body);
+    if (request.session.loggedin) {
+        const username = request.session.username;
+
+        connection.query('UPDATE users SET kalendar = ? WHERE username = ?', [kalendar, username], function (error, results, fields) {
+            if (error) {
+                throw error;
+            } else {
+                // Handle success, if needed
+                response.sendStatus(200);
+            }
+        });
+    } else {
+        response.sendStatus(401); // Unauthorized
+    }
+});
+app.post('/updateTable', (request, response) => {
+    const table = JSON.stringify(request.body);
+    if (request.session.loggedin) {
+        let username = request.session.username;
+
+        connection.query('UPDATE users SET tabelle = ? WHERE username = ?', [table, username], async function (error, results, fields) {
+            if (error) {
+                throw error;
+            } else {
+            }
+        });
+    }
+});
+
+app.post('/updatePlayers', (request, response) => {
+    const x = JSON.stringify(request.body);
+    console.log(x)
+    if (request.session.loggedin) {
+        const username = request.session.username;
+
+        connection.query('UPDATE users SET players = ? WHERE username = ?', [x, username], function (error, results, fields) {
+            if (error) {
+                throw error;
+            } else {
+                // Handle success, if needed
+                response.sendStatus(200);
+            }
+        });
+    } else {
+        response.sendStatus(401); // Unauthorized
+    }
+});
+
+app.post('/updateSpieltag', (request, response) => {
+
+    if (request.session.loggedin) {
+        let username = request.session.username;
+
+        connection.query('SELECT * FROM users WHERE username = ?', [username], function (error, results, fields) {
+            if (error) {
+                throw error;
+            } else {
+                connection.query('UPDATE users SET spieltag = ? WHERE username = ?', [results[0].spieltag + 1, username], async function (error, results, fields) {
+                    if (error) {
+                        throw error;
+                    } else {
+                    }
+                });
+            }
+        });
+    }
+});
+
 
 
 async function loadUserData(username, callback) {

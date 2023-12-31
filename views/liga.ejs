@@ -35,7 +35,9 @@
                 </div>
                 <div class="profile" draggable="false">
                     <div class="overlap-2">
-                        <img class="logo" alt="logo" width="512" src="../assets/imgs/logo.png" draggable="false">
+                        <img class="logo" alt="logo" width="512"
+                             src="https://media.discordapp.net/attachments/1168601694670688397/1177183545630924810/Untitled-1-Recovered.png?ex=65967e9c&is=6584099c&hm=ec8262c9cdcee7d1f5db4ceb5a5bd3f5246355eb0fc7ddb9bd79fd9c6227b186&=&format=webp&quality=lossless&width=640&height=640"
+                             draggable="false">
                         <div class="level">
                             <div class="level-text-wrapper">
                                 <div class="level-text">TacticX</div>
@@ -43,11 +45,6 @@
                         </div>
                     </div>
                 </div>
-                <a class="einstellungen" href="einstellungen.html" draggable="false">
-                    <img class="einstellungen-icon"
-                         src="https://c.animaapp.com/buYDRGhc/img/einstellungen-icon.svg"/>
-                    <div class="einstellungen-text">Einstellungen</div>
-                </a>
             </div>
         </div>
     </div>
@@ -60,14 +57,8 @@
                     const inputDate = Date.parse(x.dateEvent)
                     let formattedDate = new Date(inputDate).toLocaleDateString('en-GB'); // Adjust the locale as needed
                     formattedDate = formattedDate.replace(/\//g, '.');
-                    const parsedTime = Date.parse(`1970-01-01T${x.strTimeLocal}`);
-                    const formattedTime = new Date(parsedTime).toLocaleTimeString('en-US', {
-                        hour12: false,
-                        hour: '2-digit',
-                        minute: '2-digit'
-                    });
 
-                    date = `${formattedDate} | ${formattedTime}`;
+                    date = `${formattedDate}`;
 
                     let team1_badge, team2_badge
                     teams.forEach(y => {
@@ -117,6 +108,7 @@
                         <th>U</th>
                         <th>N</th>
                         <th>T</th>
+                        <th>GT</th>
                         <th>TD</th>
                         <th>PKT</th>
                         <th>Letzte 5</th>
@@ -124,6 +116,16 @@
                     </thead>
 
                     <%
+                    for (const x of tabelle) {
+                        x.intTordifferenz = x.intTore - x.intGegentore;
+                    }
+                    tabelle.sort((a, b) => {
+                        if (a.intPunkte !== b.intPunkte) {
+                            return b.intPunkte - a.intPunkte;
+                        } else {
+                            return b.intTordifferenz - a.intTordifferenz;
+                        }
+                    })
                     let i = 1;
                             for(const x of tabelle) {
                     %>
@@ -135,6 +137,7 @@
                             <td><%= x.intUnentschieden %></td>
                             <td><%= x.intNiederlagen %></td>
                             <td><%= x.intTore %></td>
+                            <td><%= x.intGegentore %></td>
                             <td><%= x.intTordifferenz %></td>
                             <td><%= x.intPunkte %></td>
                             <td><%= x.strLetzteFuenf %></td>
@@ -155,7 +158,8 @@
                         <div class="div-2">
                             <%
                             players.sort((a, b) => b.intGoals - a.intGoals);
-                            for(let i = 0;i < 4;i++) { %>
+                            for(let i = 0;i < 4;i++) {
+                            if(players[i].intGoals !== 0) { %>
                             <div class="div-3">
                                 <div class="text-wrapper-28"><%= players[i].strPlayer %></div>
                                 <div class="overlap-group-2">
@@ -163,6 +167,7 @@
                                 </div>
                             </div>
                             <%
+                            }
                             }
                             %>
 
@@ -175,7 +180,8 @@
                         <div class="div-2">
                             <%
                             players.sort((a, b) => b.intAssists - a.intAssists);
-                            for(let i = 0;i < 4;i++) { %>
+                            for(let i = 0;i < 4;i++) {
+                            if(players[i].intAssists !== 0) { %>
                             <div class="div-3">
                                 <div class="text-wrapper-28"><%= players[i].strPlayer %></div>
                                 <div class="overlap-group-2">
@@ -183,6 +189,7 @@
                                 </div>
                             </div>
                             <%
+                            }
                             }
                             %>
                         </div>
@@ -194,7 +201,9 @@
                         <div class="div-2">
                             <%
                             players.sort((a, b) => b.intAvgRating - a.intAvgRating);
-                            for(let i = 0;i < 4;i++) { %>
+                            for(let i = 0;i < 4;i++) {
+                            if(players[i].intAvgRating !== 6) {
+                            %>
                             <div class="div-3">
                                 <div class="text-wrapper-28"><%= players[i].strPlayer %></div>
                                 <div class="overlap-group-2">
@@ -202,6 +211,7 @@
                                 </div>
                             </div>
                             <%
+                            }
                             }
                             %>
                         </div>
@@ -211,12 +221,21 @@
         </div>
     </div>
 </div>
-</div>
+
+<%
+if (teamID == null || leagueID == null) {
+%>
+    <script>location.href = '/dashboard'</script>
+
+<%
+}
+%>
+
 <script src='https://code.jquery.com/jquery-3.7.0.js'></script>
-<!-- Data Table JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src='https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js'></script>
 <script src='https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js'></script>
 <script src='https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js'></script>
-<script src="../js/liga.js"></script>
+<script src="../js/index.js"></script>
 </body>
 </html>

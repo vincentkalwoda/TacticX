@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    sortTable(0);
     $('.dashboard').on('click', function () {
         postData('/getDashboard')
             .then(response => {
@@ -62,4 +63,6 @@ $(document).ready(function () {
             }
         });
     }
+
+
 });

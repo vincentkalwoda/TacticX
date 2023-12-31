@@ -1,6 +1,19 @@
 $(document).ready(function () {
     $('.dashboard').on('click', function () {
-        location.reload();
+        postData('/getDashboard')
+            .then(response => {
+                // Handle the response, e.g., check for success and redirect if needed
+                if (response.ok) {
+                    window.location.href = '/dashboard';
+                } else {
+                    console.error('Error:', response.statusText);
+                    // Handle the error, e.g., show an error message to the user
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Handle the error, e.g., show an error message to the user
+            });
     });
 
     $('.liga').on('click', function () {
@@ -62,9 +75,4 @@ $(document).ready(function () {
             }
         });
     }
-
-
-
-
-
 });

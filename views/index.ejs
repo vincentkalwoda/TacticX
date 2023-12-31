@@ -33,7 +33,9 @@
                 </div>
                 <div class="profile" draggable="false">
                     <div class="overlap-2">
-                        <img class="logo" alt="logo" width="512" src="../assets/imgs/logo.png" draggable="false">
+                        <img class="logo" alt="logo" width="512"
+                             src="https://media.discordapp.net/attachments/1168601694670688397/1177183545630924810/Untitled-1-Recovered.png?ex=65967e9c&is=6584099c&hm=ec8262c9cdcee7d1f5db4ceb5a5bd3f5246355eb0fc7ddb9bd79fd9c6227b186&=&format=webp&quality=lossless&width=640&height=640"
+                             draggable="false">
                         <div class="level">
                             <div class="level-text-wrapper">
                                 <div class="level-text">TacticX</div>
@@ -41,13 +43,6 @@
                         </div>
                     </div>
                 </div>
-                <a class="einstellungen" href="einstellungen.html" draggable="false">
-                    <div class="overlap-3">
-                        <img class="einstellungen-icon"
-                             src="https://c.animaapp.com/buYDRGhc/img/einstellungen-icon.svg"/>
-                        <div class="einstellungen-text">Einstellungen</div>
-                    </div>
-                </a>
             </div>
         </div>
         <div class="modal fade" id="teamInfos" tabindex="-1" aria-labelledby="teamInfosLabel" aria-hidden="true">
@@ -88,7 +83,46 @@
                 </div>
             </div>
         </div>
-        <!-- Modal -->
+
+        <div class="modal fade" id="matchInfos" tabindex="-1" aria-labelledby="matchInfosLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content modal-bg">
+                    <div class="modal-header text-center d-flex justify-content-center">
+                        <h5 class="modal-title" id="team1"
+                            style="position: absolute; left: 0; width: 45%; text-align: right;"></h5>
+                        <h5 class="modal-title" id="team2"
+                            style="position: absolute; right: 0; width: 45%; text-align: left;"></h5>
+                        <h5 class="modal-title position-absolute w-100 text-center">vs</h5>
+                        <button type="button" class="btn-close btn-close-white matchClose" data-bs-dismiss="modal"
+                                aria-label="Close">
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex justify-content-center text-center" id="score">0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0</div>
+                        <div class="row">
+                            <div class="col-sm-6" id="team1goal1" style="text-align: right; color: dimgrey;"></div>
+                            <div class="col-sm-6" id="team2goal1" style="text-align: left; color: dimgrey;"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6" id="team1goal2" style="text-align: right; color: dimgrey;"></div>
+                            <div class="col-sm-6" id="team2goal2" style="text-align: left; color: dimgrey;"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6" id="team1goal3" style="text-align: right; color: dimgrey;"></div>
+                            <div class="col-sm-6" id="team2goal3" style="text-align: left; color: dimgrey;"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6" id="team1goal4" style="text-align: right; color: dimgrey;"></div>
+                            <div class="col-sm-6" id="team2goal4" style="text-align: left; color: dimgrey;"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6" id="team1goal5" style="text-align: right; color: dimgrey;"></div>
+                            <div class="col-sm-6" id="team2goal5" style="text-align: left; color: dimgrey;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
         <div class="modal fade login " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
@@ -247,13 +281,7 @@
                     let formattedDate = new Date(inputDate).toLocaleDateString('en-GB'); // Adjust the locale as needed
                     formattedDate = formattedDate.replace(/\//g, '.');
                     const parsedTime = Date.parse(`1970-01-01T${x.strTimeLocal}`);
-                    const formattedTime = new Date(parsedTime).toLocaleTimeString('en-US', {
-                        hour12: false,
-                        hour: '2-digit',
-                        minute: '2-digit'
-                    });
-
-                    date = `${formattedDate} | ${formattedTime}`;
+                    date = `${formattedDate}`;
                     const inMilliseconds = Date.parse(x.dateEvent) - Date.parse(datum);
                     let inDays = inMilliseconds / (24 * 60 * 60 * 1000);
                     inDays = Math.round(inDays)
@@ -261,7 +289,7 @@
                 if (i >= 1) { %>
                     <div class="match">
                         <div class="info">
-                            <div class="date"><%= date %></div>
+                            <div class="date">Spieltag <%= spieltag + i %></div>
                             <div class="stadium" id="match-stadium"><%= stadium %></div>
                             <div class="text-wrapper-6">VS</div>
                         </div>
@@ -313,14 +341,10 @@
 
                     const inputDate = x.dateEvent.split("-");
                     const formattedDate = `${inputDate[2]}.${inputDate[1]}.${inputDate[0]}`;
-                    const inputTime = x.strTimeLocal.split(":");
-                    const formattedTime = `${inputTime[0]}:${inputTime[1]}`;
-                    date = `${formattedDate} | ${formattedTime}`;
-                    const inMilliseconds = Date.parse(x.dateEvent) - Date.parse(datum);
-                    let inDays = inMilliseconds / (24 * 60 * 60 * 1000);
-                    inDays = Math.round(inDays)
+                    date = `${formattedDate}`;
 
-                if (i === 0) { %>
+                if (i === 0) {
+                %>
                     <div class="match-4">
                         <div class="gegner-4 showTeam" id="<%= gegner %>">
                             <div class="overlap-group-3">
@@ -331,11 +355,11 @@
                                  src="<%= team2_badge %>" draggable="false">
                         </div>
                         <div class="info-2">
-                            <div class="info-date"><%= date %></div>
+                            <div class="info-date">Spieltag <%= spieltag %></div>
                             <div class="info-stadium" id="match1-stadium"><%= stadium %></div>
                             <div class="group-2">
-                                <button class="overlap-group-4">
-                                    <div class="text-wrapper-7"><%= inDays %> Tage</div>
+                                <button id="<%= x.idEvent %>" class="overlap-group-4">
+                                    <div class="text-wrapper-7">Simulieren</div>
                                 </button>
                             </div>
                         </div>
@@ -348,8 +372,8 @@
                             </div>
                         </div>
                     </div>
-                <% }
-
+                <%
+                }
                 }
                 } %>
             </div>
@@ -358,14 +382,417 @@
     <div class="spinner-border" role="status"></div>
 </div>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="../js/index.js"></script>
 <script>
     $(document).ready(function () {
+        let tabelle = '<%= encodeURIComponent(JSON.stringify(tabelle)) %>';
+        tabelle = JSON.parse(decodeURIComponent(tabelle));
+        let kalendar = '<%= encodeURIComponent(JSON.stringify(kalendar)) %>';
+        kalendar = JSON.parse(decodeURIComponent(kalendar));
+        let players = '<%= encodeURIComponent(JSON.stringify(players)) %>';
+        players = JSON.parse(decodeURIComponent(players));
+        let aufstellung = '<%= encodeURIComponent(JSON.stringify(aufstellung)) %>';
+        aufstellung = JSON.parse(decodeURIComponent(aufstellung));
+        let teams = '<%= encodeURIComponent(JSON.stringify(teams)) %>';
+        teams = JSON.parse(decodeURIComponent(teams));
+        let teamID = '<%= encodeURIComponent(JSON.stringify(teamID)) %>';
+        teamID = JSON.parse(decodeURIComponent(teamID));
+        let spieltag = '<%= encodeURIComponent(JSON.stringify(spieltag)) %>';
+        spieltag = JSON.parse(decodeURIComponent(spieltag));
+
+        $('.matchClose').on('click', function () {
+            sendTable(tabelle);
+            sendSpieltag();
+            sendKalendar(kalendar);
+            sendPlayers(players);
+            location.reload();
+        });
+
         $('.showTeam').on('click', function () {
             const clickedId = $(this).attr('id');
             showTeamInfos(clickedId)
         });
+
+        $(".overlap-group-4").on('click', function () {
+            for (const x of kalendar) {
+                if (x.intRound == spieltag) {
+                    generateMatchResult(idEvent);
+                }
+            }
+        });
+
+        function generateMatchResult(idEvent) {
+            let team1, team2;
+            let team1Rating = 0;
+            let team2Rating = 0;
+
+            for (const x of kalendar) {
+                if (x.idEvent === idEvent) {
+                    if (x.idHomeTeam === teamID) {
+                        team1 = x.idHomeTeam;
+                        team2 = x.idAwayTeam;
+                        for (const y of aufstellung) {
+                            for (const z of players) {
+                                if (z.idPlayer === y.idPlayer) team1Rating += z.intRating;
+                            }
+                        }
+                        for (const y of teams) {
+                            if (team2 === y.idTeam) {
+                                for (const z of y.strLocked) {
+                                    for (const a of players) {
+                                        if (a.idPlayer === z.idPlayer) {
+                                            team2Rating += a.intRating;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else if (x.idAwayTeam === teamID) {
+                        team1 = x.idAwayTeam;
+                        team2 = x.idHomeTeam;
+                        for (const y of aufstellung) {
+                            for (const z of players) {
+                                if (z.idPlayer === y.idPlayer) team1Rating += z.intRating;
+                            }
+                        }
+                        for (const y of teams) {
+                            if (team2 === y.idTeam) {
+                                for (const z of y.strLocked) {
+                                    for (const a of players) {
+                                        if (a.idPlayer === z.idPlayer) {
+                                            team2Rating += a.intRating;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        team1 = x.idHomeTeam;
+                        team2 = x.idAwayTeam;
+                        for (const y of teams) {
+                            if (team1 === y.idTeam) {
+                                for (const z of y.strLocked) {
+                                    for (const a of players) {
+                                        if (a.idPlayer === z.idPlayer) {
+                                            team1Rating += a.intRating;
+                                        }
+                                    }
+                                }
+                            }
+                            if (team2 === y.idTeam) {
+                                for (const z of y.strLocked) {
+                                    for (const a of players) {
+                                        if (a.idPlayer === z.idPlayer) {
+                                            team2Rating += a.intRating;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            const totalRating = team1Rating + team2Rating;
+            const team1Probability = team1Rating / totalRating;
+            const team2Probability = team2Rating / totalRating;
+
+            const team1Goals = generateGoals(team1Probability);
+            const team2Goals = generateGoals(team2Probability);
+
+            if (team1Goals.length > team2Goals.length) {
+                for (const x of tabelle) {
+                    if (x.idTeam === team1) {
+                        x.intSpiele += 1;
+                        x.intSiege += 1;
+                        x.intPunkte += 3;
+                        x.intTore += team1Goals.length;
+                        x.intGegentore += team2Goals.length;
+                        x.strLetzteFuenf += "S"
+                    } else if (x.idTeam === team2) {
+                        x.intSpiele += 1;
+                        x.intNiederlagen += 1;
+                        x.intTore += team2Goals.length;
+                        x.intGegentore += team1Goals.length;
+                        x.strLetzteFuenf += "N"
+                    }
+                }
+            } else if (team1Goals.length < team2Goals.length) {
+                for (const x of tabelle) {
+                    if (x.idTeam === team1) {
+                        x.intSpiele += 1;
+                        x.intNiederlagen += 1;
+                        x.intTore += team1Goals.length;
+                        x.intGegentore += team2Goals.length;
+                        x.strLetzteFuenf += "N"
+                    } else if (x.idTeam === team2) {
+                        x.intSpiele += 1;
+                        x.intSiege += 1;
+                        x.intPunkte += 3;
+                        x.intTore += team2Goals.length;
+                        x.intGegentore += team1Goals.length;
+                        x.strLetzteFuenf += "S"
+                    }
+                }
+            } else {
+                for (const x of tabelle) {
+                    if (x.idTeam === team1) {
+                        x.intSpiele += 1;
+                        x.intUnentschieden += 1;
+                        x.intPunkte += 1;
+                        x.intTore += team1Goals.length;
+                        x.intGegentore += team2Goals.length;
+                        x.strLetzteFuenf += "U"
+                    } else if (x.idTeam === team2) {
+                        x.intSpiele += 1;
+                        x.intUnentschieden += 1;
+                        x.intPunkte += 1;
+                        x.intTore += team2Goals.length;
+                        x.intGegentore += team1Goals.length;
+                        x.strLetzteFuenf += "U"
+                    }
+                }
+            }
+
+            for (const x of kalendar) {
+                if (x.idEvent === idEvent) {
+                    if (x.idHomeTeam === team1) {
+                        x.intHomeScore = team1Goals.length;
+                        x.intAwayScore = team2Goals.length;
+                    } else if (x.idAwayTeam === team1) {
+                        x.intHomeScore = team2Goals.length;
+                        x.intAwayScore = team1Goals.length;
+                    }
+                    for (const y of teams) {
+                        if (y.idTeam === team1) {
+                            for (let i = 0; i < team1Goals.length; i++) {
+                                for (const z of y.strLocked) {
+                                    if (team1Goals[i].id === z.idPlayer) {
+                                        for (const a of players) {
+                                            if (a.idPlayer === z.idPlayer) {
+                                                a.intGoals += 1;
+                                            }
+                                        }
+                                    } else if (team1Goals[i].assist.id === z.idPlayer) {
+                                        for (const a of players) {
+                                            if (a.idPlayer === z.idPlayer) {
+                                                a.intAssists += 1;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        } else if (y.idTeam === team2) {
+                            for (let i = 0; i < team2Goals.length; i++) {
+                                for (const z of y.strLocked) {
+                                    if (team2Goals[i].id === z.idPlayer) {
+                                        for (const a of players) {
+                                            if (a.idPlayer === z.idPlayer) {
+                                                a.intGoals += 1;
+                                            }
+                                        }
+                                    } else if (team2Goals[i].assist.id === z.idPlayer) {
+                                        for (const a of players) {
+                                            if (a.idPlayer === z.idPlayer) {
+                                                a.intAssists += 1;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+            let strTeam1, strTeam2;
+            for (const x of teams) {
+                if (team1 === x.idTeam) {
+                    strTeam1 = x.strTeam;
+                } else if (team2 === x.idTeam) {
+                    strTeam2 = x.strTeam;
+                }
+            }
+            if (team1 === teamID || team2 === teamID) {
+                team1Goals.sort((x, y) => x.minute - y.minute)
+                team2Goals.sort((x, y) => x.minute - y.minute)
+
+                console.log(team1Goals)
+                console.log(team2Goals)
+
+                $("#team1").text(strTeam1);
+                $("#team2").text(strTeam2);
+                $("#score").text(team1Goals.length + ":" + team2Goals.length)
+                for (let i = 0; i < team1Goals.length; i++) {
+                    for (const x of aufstellung) {
+                        if (x.positionOnField === team1Goals[i].id) {
+                            for (const y of players) {
+                                if (y.idPlayer === x.idPlayer)
+                                    y.intGoals += 1;
+                                $("#team1goal" + (i + 1)).text(team1Goals[i].minute + "' " + y.strPlayer);
+                            }
+                        } else if (x.positionOnField === team1Goals[i].assist.id) {
+                            for (const y of players) {
+                                if (y.idPlayer === x.idPlayer) {
+                                    y.intAssists += 1;
+                                    console.log(y.intAssists)
+                                }
+                            }
+                        }
+                    }
+
+                }
+                for (let i = 0; i < team2Goals.length; i++) {
+                    for (const x of teams) {
+                        if (x.idTeam === team2) {
+                            for (const y of x.strLocked) {
+                                if (y.positionOnField === team2Goals[i].id) {
+                                    for (const z of players) {
+                                        if (z.idPlayer === y.idPlayer)
+                                            z.intGoals += 1;
+                                        $("#team2goal" + (i + 1)).text(team2Goals[i].minute + "' " + z.strPlayer);
+                                    }
+                                } else if (x.positionOnField === team2Goals[i].assist.id) {
+                                    for (const y of players) {
+                                        if (y.idPlayer === x.idPlayer)
+                                            y.intAssists += 1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                $("#matchInfos").modal('show');
+            }
+        }
+
+        function sendKalendar(kalendar) {
+            fetch('http://localhost:3000/updateKalendar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(kalendar),
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Network response was not ok: ${response.statusText}`);
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    // Handle the response data
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+
+        function sendTable(table) {
+            fetch('http://localhost:3000/updateTable', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(table),
+            })
+                .then(response => response.text())
+                .then(data => {
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function sendPlayers(players) {
+
+            fetch('http://localhost:3000/updatePlayers', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(players), // Send the formatted date
+            })
+                .then(response => response.text())
+                .then(data => {
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function sendSpieltag() {
+            fetch('http://localhost:3000/updateSpieltag', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: "",
+            })
+                .then(response => response.text())
+                .then(data => {
+                    console.log('Response:', data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function generateGoals(probability) {
+            const goals = [];
+            const numGoals = Math.floor(Math.random() * 5);
+
+            for (let i = 0; i < numGoals; i++) {
+                if (Math.random() < probability) {
+                    goals.push(generateScorer());
+                }
+            }
+            return [...new Set(goals)];
+        }
+
+
+        function generateScorer() {
+            const randomPosition = Math.random();
+            const scorer = {};
+
+            if (randomPosition < 0.6) {
+                //60% -> Stürmer
+                scorer.id = Math.floor(Math.random() * 3) + 9;
+            } else if (randomPosition < 0.9) {
+                //30% -> Mittelfeld
+                scorer.id = Math.floor(Math.random() * 3) + 6;
+            } else {
+                //10% -> Verteidigung
+                scorer.id = Math.floor(Math.random() * 4) + 2;
+            }
+
+            scorer.minute = Math.floor(Math.random() * 90) + 1;
+
+            scorer.assist = generateAssist();
+
+            return scorer;
+        }
+
+        function generateAssist() {
+            const randomPosition = Math.random();
+            const assist = {};
+
+            // Assign assisting player based on position probabilities
+            if (randomPosition < 0.4) {
+                // Forward (ids 9-11)
+                assist.id = Math.floor(Math.random() * 3) + 9;
+            } else if (randomPosition < 0.8) {
+                // Midfield (ids 6-8)
+                assist.id = Math.floor(Math.random() * 3) + 6;
+            } else {
+                // Defender (ids 2-5)
+                assist.id = Math.floor(Math.random() * 4) + 2;
+            }
+
+            return assist;
+        }
+
 
         function showTeamInfos(teamId) {
             $(".tabelle").empty()
@@ -444,6 +871,9 @@
                 `);
                         }
                     })
+                    for (const x of tabelle) {
+                        x.intTordifferenz = x.intTore - x.intGegentore;
+                    }
                     tabelle.sort((a, b) => {
                         if (a.intPunkte !== b.intPunkte) {
                             return b.intPunkte - a.intPunkte;
@@ -463,6 +893,7 @@
                             <td>${x.intUnentschieden}</td>
                             <td>${x.intNiederlagen}</td>
                             <td>${x.intTore}</td>
+                            <td>${x.intGegentore}</td>
                             <td>${x.intTordifferenz}</td>
                             <td>${x.intPunkte}</td>
                             <td>${x.strLetzteFuenf}</td>
@@ -478,6 +909,7 @@
                             <td>${x.intUnentschieden}</td>
                             <td>${x.intNiederlagen}</td>
                             <td>${x.intTore}</td>
+                            <td>${x.intGegentore}</td>
                             <td>${x.intTordifferenz}</td>
                             <td>${x.intPunkte}</td>
                             <td>${x.strLetzteFuenf}</td>
@@ -496,6 +928,7 @@
                         <th>U</th>
                         <th>N</th>
                         <th>T</th>
+                        <th>GT</th>
                         <th>TD</th>
                         <th>PKT</th>
                         <th>Letzte 5</th>
@@ -524,7 +957,7 @@
                         <div class="rating">${x.intRating}</div>
                     </div>
                 `)
-                    } else if (x.strPosition.includes("B")) {
+                    } else if (x.strPosition === "LB" || x.strPosition === "CB" || x.strPosition === "RB") {
                         $("#verteidigung").append(`
                     <div class="spielerbox">
                         <img class="pb" src="${badge}">
@@ -535,7 +968,7 @@
                         <div class="rating">${x.intRating}</div>
                     </div>
                 `)
-                    } else if (x.strPosition.includes("M")) {
+                    } else if (x.strPosition && x.strPosition.includes("M")) {
                         $("#mittelfeld").append(`
                     <div class="spielerbox">
                         <img class="pb" src="${badge}">
@@ -546,7 +979,7 @@
                         <div class="rating">${x.intRating}</div>
                     </div>
                 `)
-                    } else if (x.strPosition.includes("F") || x.strPosition.includes("W")) {
+                    } else if (x.strPosition && (x.strPosition.includes("F") || x.strPosition.includes("W"))) {
                         $("#sturm").append(`
                     <div class="spielerbox">
                         <img class="pb" src="${badge}">
@@ -565,5 +998,8 @@
         }
     })
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/055b9b90fa.js" crossorigin="anonymous"></script>
+<script src="../js/index.js"></script>
 </body>
 </html>

@@ -450,6 +450,79 @@ html, body {
     left: 110px;
 }
 
+.modal-bg {
+    background-color: #16161f;
+    border-radius: 30px;
+}
+
+.modal-title {
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #5F5FFF;
+    font-size: 30px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #5F5FFF;
+    outline: none;
+    border: none;
+}
+
+.login-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form input,
+form select {
+    background-color: #252533 !important;
+    color: white !important;
+    border: 1px solid #555 !important;
+}
+
+label {
+    color: white !important;
+}
+
+.spinner-border {
+    display: none;
+    color: #5F5FFF;
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    top: 50%;
+    bottom: 50%;
+}
+
+.btn {
+    width: 100%;
+}
+
+#teamInfos_badge {
+    width: 50px;
+    margin-right: 18px;
+    margin-left: 5px;
+}
+
+.nav-link {
+    color: #5F5FFF;
+}
+
+.nav-link.active {
+    color: #252533;
+!important;
+}
+
+.modal-header {
+    border: none;
+}
+
+
 .frame .material-symbols {
     position: absolute;
     width: 30px;
@@ -645,10 +718,11 @@ table th {
     white-space: nowrap;
 }
 
-table .spieler tr {
+table tbody tr {
     height: 50px;
     width: 100%;
     background-color: #252533;
+    border-radius: 20px !important;
 }
 
 table .spieler td:first-child {
@@ -885,6 +959,11 @@ table tbody tr {
     letter-spacing: 0;
     line-height: normal;
     white-space: nowrap;
+}
+
+.group-40 #rating, #flag {
+    color: rgba(0, 0, 0, 0);
+    font-size: 0;
 }
 
 .frame .group-30 {
