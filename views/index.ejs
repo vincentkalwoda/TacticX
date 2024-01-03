@@ -119,6 +119,68 @@
                             <div class="col-sm-6" id="team1goal5" style="text-align: right; color: dimgrey;"></div>
                             <div class="col-sm-6" id="team2goal5" style="text-align: left; color: dimgrey;"></div>
                         </div>
+                        <div class="w-100 stats">
+                            <div class="row">
+                                <div class="col-sm-12 text-center text-white mt-1">Ballbesitz</div>
+                            </div>
+                            <div class="row m-1 d-flex justify-content-center">
+                                <div class="p-0" style="display: flex; width: 82%">
+                                    <div class=" px-1" id="team1BallPossession"
+                                         style="width:50%;border-bottom-left-radius: 10px; border-top-left-radius: 10px;">
+                                        42%
+                                    </div>
+                                    <div class=" text-end px-1" id="team2BallPossession"
+                                         style="width:50%;border-bottom-right-radius: 10px; border-top-right-radius: 10px;">
+                                        58%
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-2">
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm-2 p-0">
+                                    <div id="team1Expected" style="width: 30px;height: 30px; border-radius: 50%"><p
+                                                class="text-center" style="padding-top: 4px; color:white;"
+                                                id="team1ExpectedGoals">3</p></div>
+                                </div>
+                                <div class="col-sm-6 text-center text-white">Erwartete Tore</div>
+                                <div class="col-sm-2 d-flex justify-content-end p-0">
+                                    <div id="team2Expected" style="width: 30px;height: 30px; border-radius: 50%"><p
+                                                class="text-center" style="padding-top: 4px; color:white;"
+                                                id="team2ExpectedGoals">1</p></div>
+                                </div>
+                                <div class="col-sm-1"></div>
+                            </div>
+                            <div class="row m-2">
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm-2 p-0">
+                                    <div id="team1Shots1" style="width: 30px;height: 30px; border-radius: 50%"><p
+                                                class="text-center" style="padding-top: 4px; color:white;"
+                                                id="team1Shots">3</p></div>
+                                </div>
+                                <div class="col-sm-6 text-center text-white">Schüsse</div>
+                                <div class="col-sm-2 d-flex justify-content-end p-0">
+                                    <div id="team2Shots1" style="width: 30px;height: 30px; border-radius: 50%"><p
+                                                class="text-center" style="padding-top: 4px; color:white;"
+                                                id="team2Shots">1</p></div>
+                                </div>
+                                <div class="col-sm-1"></div>
+                            </div>
+                            <div class="row m-2">
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm-2 p-0">
+                                    <div id="team1ShotsOnTarget1" style="width: 30px;height: 30px; border-radius: 50%">
+                                        <p class="text-center" style="padding-top: 4px; color:white;"
+                                           id="team1ShotsOnTarget">3</p></div>
+                                </div>
+                                <div class="col-sm-6 text-center text-white">Schüsse aufs Tor</div>
+                                <div class="col-sm-2 d-flex justify-content-end p-0">
+                                    <div id="team2ShotsOnTarget1" style="width: 30px;height: 30px; border-radius: 50%">
+                                        <p class="text-center" style="padding-top: 4px; color:white;"
+                                           id="team2ShotsOnTarget">1</p></div>
+                                </div>
+                                <div class="col-sm-1"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -154,7 +216,7 @@
                                 </div>
                                 <div class="form-check">
                                 </div>
-                                <button type="submit" class="btn btn-primary">Erstellen</button>
+                                <button type="submit" class="btn btn-primary" id="select">Erstellen</button>
                             </div>
                             <div class="spinner-border" role="status"></div>
                         </form>
@@ -204,6 +266,7 @@
         %>
 
         <div class="main">
+            <div id="coins"><i class="fa-solid fa-coins"></i> <%= coins %></div>
             <div class="ergebnis-text">
                 Ergebnisse
                 <div class="ergebnisse">
@@ -398,12 +461,15 @@
         teamID = JSON.parse(decodeURIComponent(teamID));
         let spieltag = '<%= encodeURIComponent(JSON.stringify(spieltag)) %>';
         spieltag = JSON.parse(decodeURIComponent(spieltag));
+        let coins = '<%= encodeURIComponent(JSON.stringify(coins)) %>';
+        coins = JSON.parse(decodeURIComponent(coins));
 
         $('.matchClose').on('click', function () {
             sendTable(tabelle);
             sendSpieltag();
             sendKalendar(kalendar);
             sendPlayers(players);
+            sendCoins(coins);
             location.reload();
         });
 
@@ -412,16 +478,21 @@
             showTeamInfos(clickedId)
         });
 
+
+        $("#select").on('click', function () {
+            $(".spinner-border").show();
+        });
+
         $(".overlap-group-4").on('click', function () {
             for (const x of kalendar) {
                 if (x.intRound == spieltag) {
-                    generateMatchResult(idEvent);
+                    generateMatchResult(x.idEvent);
                 }
             }
         });
 
         function generateMatchResult(idEvent) {
-            let team1, team2;
+            let team1, team2, team1Kit, team2Kit;
             let team1Rating = 0;
             let team2Rating = 0;
 
@@ -492,13 +563,30 @@
                 }
             }
 
-
+            if (team1Rating > team2Rating)
+                team1Rating += 300;
+            else if (team2Rating > team1Rating)
+                team2Rating += 300;
             const totalRating = team1Rating + team2Rating;
+
             const team1Probability = team1Rating / totalRating;
             const team2Probability = team2Rating / totalRating;
 
             const team1Goals = generateGoals(team1Probability);
             const team2Goals = generateGoals(team2Probability);
+
+            const team1Possession = Math.round(Math.random() * 40) + 30;
+            const team2Possession = 100 - team1Possession;
+
+            const team1ExpectedGoals = calculateExpectedGoals(team1Rating);
+            const team2ExpectedGoals = calculateExpectedGoals(team2Rating);
+
+            const team1Shots = Math.floor(Math.random() * 15) + 5;
+            const team2Shots = Math.floor(Math.random() * 15) + 5;
+
+            const team1ShotsOnTarget = Math.floor(Math.random() * (team1Shots * 0.3)) + Math.floor(team1Shots * 0.2);
+            const team2ShotsOnTarget = Math.floor(Math.random() * (team2Shots * 0.3)) + Math.floor(team2Shots * 0.2);
+
 
             if (team1Goals.length > team2Goals.length) {
                 for (const x of tabelle) {
@@ -517,6 +605,8 @@
                         x.strLetzteFuenf += "N"
                     }
                 }
+                if (team1 === teamID)
+                    coins += Math.random() * 21 + 60; //60-80
             } else if (team1Goals.length < team2Goals.length) {
                 for (const x of tabelle) {
                     if (x.idTeam === team1) {
@@ -534,6 +624,8 @@
                         x.strLetzteFuenf += "S"
                     }
                 }
+                if (team1 === teamID)
+                    coins += Math.random() * 16 + 10; //10-25
             } else {
                 for (const x of tabelle) {
                     if (x.idTeam === team1) {
@@ -552,7 +644,57 @@
                         x.strLetzteFuenf += "U"
                     }
                 }
+                if (team1 === teamID)
+                    coins += Math.random() * 21 + 30; // 30-50
             }
+
+            for (const x of tabelle) {
+                if (x.strLetzteFuenf.length > 5) {
+                    x.strLetzteFuenf = x.strLetzteFuenf.substring(1);
+                }
+            }
+
+            for (const y of teams) {
+                if (y.idTeam === team1 && team1 !== teamID) {
+                    for (let i = 0; i < team1Goals.length; i++) {
+                        for (const z of y.strLocked) {
+                            if (team1Goals[i].id === z.positionOnField) {
+                                for (const a of players) {
+                                    if (a.idPlayer === z.idPlayer) {
+                                        console.log(a.strPlayer)
+                                        a.intGoals += 1;
+                                    }
+                                }
+                            } else if (team1Goals[i].assist.id === z.positionOnField) {
+                                for (const a of players) {
+                                    if (a.idPlayer === z.idPlayer) {
+                                        a.intAssists += 1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } else if (y.idTeam === team2 && team1 !== teamID) {
+                    for (let i = 0; i < team2Goals.length; i++) {
+                        for (const z of y.strLocked) {
+                            if (team2Goals[i].id === z.positionOnField) {
+                                for (const a of players) {
+                                    if (a.idPlayer === z.idPlayer) {
+                                        a.intGoals += 1;
+                                    }
+                                }
+                            } else if (team2Goals[i].assist.id === z.positionOnField) {
+                                for (const a of players) {
+                                    if (a.idPlayer === z.idPlayer) {
+                                        a.intAssists += 1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
 
             for (const x of kalendar) {
                 if (x.idEvent === idEvent) {
@@ -563,46 +705,6 @@
                         x.intHomeScore = team2Goals.length;
                         x.intAwayScore = team1Goals.length;
                     }
-                    for (const y of teams) {
-                        if (y.idTeam === team1) {
-                            for (let i = 0; i < team1Goals.length; i++) {
-                                for (const z of y.strLocked) {
-                                    if (team1Goals[i].id === z.idPlayer) {
-                                        for (const a of players) {
-                                            if (a.idPlayer === z.idPlayer) {
-                                                a.intGoals += 1;
-                                            }
-                                        }
-                                    } else if (team1Goals[i].assist.id === z.idPlayer) {
-                                        for (const a of players) {
-                                            if (a.idPlayer === z.idPlayer) {
-                                                a.intAssists += 1;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        } else if (y.idTeam === team2) {
-                            for (let i = 0; i < team2Goals.length; i++) {
-                                for (const z of y.strLocked) {
-                                    if (team2Goals[i].id === z.idPlayer) {
-                                        for (const a of players) {
-                                            if (a.idPlayer === z.idPlayer) {
-                                                a.intGoals += 1;
-                                            }
-                                        }
-                                    } else if (team2Goals[i].assist.id === z.idPlayer) {
-                                        for (const a of players) {
-                                            if (a.idPlayer === z.idPlayer) {
-                                                a.intAssists += 1;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-
                 }
             }
             let strTeam1, strTeam2;
@@ -613,12 +715,11 @@
                     strTeam2 = x.strTeam;
                 }
             }
+
             if (team1 === teamID || team2 === teamID) {
+
                 team1Goals.sort((x, y) => x.minute - y.minute)
                 team2Goals.sort((x, y) => x.minute - y.minute)
-
-                console.log(team1Goals)
-                console.log(team2Goals)
 
                 $("#team1").text(strTeam1);
                 $("#team2").text(strTeam2);
@@ -627,15 +728,15 @@
                     for (const x of aufstellung) {
                         if (x.positionOnField === team1Goals[i].id) {
                             for (const y of players) {
-                                if (y.idPlayer === x.idPlayer)
+                                if (y.idPlayer === x.idPlayer) {
                                     y.intGoals += 1;
-                                $("#team1goal" + (i + 1)).text(team1Goals[i].minute + "' " + y.strPlayer);
+                                    $("#team1goal" + (i + 1)).text(team1Goals[i].minute + "' " + y.strPlayer);
+                                }
                             }
                         } else if (x.positionOnField === team1Goals[i].assist.id) {
                             for (const y of players) {
                                 if (y.idPlayer === x.idPlayer) {
                                     y.intAssists += 1;
-                                    console.log(y.intAssists)
                                 }
                             }
                         }
@@ -648,9 +749,10 @@
                             for (const y of x.strLocked) {
                                 if (y.positionOnField === team2Goals[i].id) {
                                     for (const z of players) {
-                                        if (z.idPlayer === y.idPlayer)
+                                        if (z.idPlayer === y.idPlayer) {
                                             z.intGoals += 1;
-                                        $("#team2goal" + (i + 1)).text(team2Goals[i].minute + "' " + z.strPlayer);
+                                            $("#team2goal" + (i + 1)).text(team2Goals[i].minute + "' " + z.strPlayer);
+                                        }
                                     }
                                 } else if (x.positionOnField === team2Goals[i].assist.id) {
                                     for (const y of players) {
@@ -662,9 +764,136 @@
                         }
                     }
                 }
+
+                for (const x of teams) {
+                    if (x.idTeam === team1)
+                        team1Kit = x.strKitColour1;
+                    else if (x.idTeam === team2)
+                        team2Kit = x.strKitColour1;
+                }
+                if (team1Kit !== "#FFFFFF") {
+                    $("#team1BallPossession")
+                        .text(team1Possession + "%")
+                        .css({
+                            width: team1Possession + "%",
+                            backgroundColor: team1Kit,
+                            color: "#FFFFFF"
+                        });
+                } else {
+                    $("#team1BallPossession")
+                        .text(team1Possession + "%")
+                        .css({
+                            width: team1Possession + "%",
+                            backgroundColor: team1Kit,
+                            color: "#000"
+                        });
+                }
+
+                if (team2Kit !== "#FFFFFF") {
+                    $("#team2BallPossession")
+                        .text(team2Possession + "%")
+                        .css({
+                            width: team2Possession + "%",
+                            backgroundColor: team2Kit,
+                            color: "#FFFFFF"
+                        });
+                } else {
+                    $("#team2BallPossession")
+                        .text(team2Possession + "%")
+                        .css({
+                            width: team2Possession + "%",
+                            backgroundColor: team2Kit,
+                            color: "#000"
+                        });
+                }
+                $("#team1ExpectedGoals").text(team1ExpectedGoals);
+                $("#team2ExpectedGoals").text(team2ExpectedGoals);
+                if (team1ExpectedGoals > team2ExpectedGoals) {
+                    if (team1Kit === "#FFFFFF") {
+                        $("#team1Expected").css("backgroundColor", team1Kit);
+                        $("#team1ExpectedGoals").css("color", "#000")
+                        $("#team2Expected").css("background-color", "none");
+                    } else {
+                        $("#team1Expected").css("background-color", team1Kit);
+                        $("#team2Expected").css("background-color", "none");
+                    }
+                } else if (team1ExpectedGoals < team2ExpectedGoals) {
+                    if (team2Kit === "#FFFFFF") {
+                        $("#team2Expected").css("backgroundColor".team2Kit);
+                        $("#team2ExpectedGoals").css("color", "#000")
+                        $("#team1Expected").css("background-color", "none");
+                    } else {
+                        $("#team2Expected").css("background-color", team2Kit);
+                        $("#team1Expected").css("background-color", "none");
+                    }
+                } else {
+                    $("#team1Expected").css("background-color", "none");
+                    $("#team2Expected").css("background-color", "none");
+                }
+
+                $("#team1Shots").text(team1Shots);
+                $("#team2Shots").text(team2Shots);
+                if (team1Shots > team2Shots) {
+                    if (team1Kit === "#FFFFFF") {
+                        $("#team1Shots1").css("backgroundColor", team1Kit);
+                        $("#team1Shots").css("color", "#000")
+                        $("#team2Shots1").css("background-color", "none");
+                    } else {
+                        $("#team2Shots1").css("background-color", team2Kit);
+                        $("#team1Shots1").css("background-color", "none");
+                    }
+                } else if (team1Shots < team2Shots) {
+                    if (team2Kit === "#FFFFFF") {
+                        $("#team2Shots1").css("backgroundColor", team2Kit);
+                        $("#team2Shots").css("color", "#000")
+                        $("#team1Shots1").css("background-color", "none");
+                    } else {
+                        $("#team2Shots1").css("background-color", team2Kit);
+                        $("#team1Shots1").css("background-color", "none");
+                    }
+                } else {
+                    $("#team1Shots1").css("background-color", "none");
+                    $("#team2Shots1").css("background-color", "none");
+                }
+
+                $("#team1ShotsOnTarget").text(team1ShotsOnTarget);
+                $("#team2ShotsOnTarget").text(team2ShotsOnTarget);
+                if (team1ShotsOnTarget > team2ShotsOnTarget) {
+                    if (team1Kit === "#FFFFFF") {
+                        $("#team1ShotsOnTarget1").css("backgroundColor", team1Kit);
+                        $("#team1ShotsOnTarget").css("color", "#000")
+                        $("#team2ShotsOnTarget1").css("background-color", "none");
+                    } else {
+                        $("#team1ShotsOnTarget1").css("background-color", team1Kit);
+                        $("#team2ShotsOnTarget1").css("background-color", "none");
+                    }
+                } else if (team1ShotsOnTarget < team2ShotsOnTarget) {
+                    if (team2Kit === "#FFFFFF") {
+                        $("#team2ShotsOnTarget1").css("backgroundColor", team2Kit);
+                        $("#team2ShotsOnTarget").css("color", "#000")
+                        $("#team1ShotsOnTarget1").css("background-color", "none");
+                    } else {
+                        $("#team2ShotsOnTarget1").css("background-color", team2Kit);
+                        $("#team1ShotsOnTarget1").css("background-color", "none");
+                    }
+                } else {
+                    $("#team1ShotsOnTarget1").css("background-color", "none");
+                    $("#team2ShotsOnTarget1").css("background-color", "none");
+                }
+
+                console.log(team1ExpectedGoals + ":" + team2ExpectedGoals)
                 $("#matchInfos").modal('show');
             }
         }
+
+        function calculateExpectedGoals(teamRating) {
+            const randomNumber = (Math.random() * 3) + 0.5;
+
+            const roundedNumber = randomNumber.toFixed(1);
+
+            return parseFloat(roundedNumber);
+        }
+
 
         function sendKalendar(kalendar) {
             fetch('http://localhost:3000/updateKalendar', {
@@ -739,6 +968,24 @@
                 });
         }
 
+        function sendCoins(coins) {
+            fetch('http://localhost:3000/updateCoins', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({coins: coins}), // Convert coins to a JSON string
+            })
+                .then(response => response.text())
+                .then(data => {
+                    console.log('Response:', data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+
         function generateGoals(probability) {
             const goals = [];
             const numGoals = Math.floor(Math.random() * 5);
@@ -774,20 +1021,20 @@
             return scorer;
         }
 
-        function generateAssist() {
+        function generateAssist(scorerId) {
             const randomPosition = Math.random();
             const assist = {};
 
             // Assign assisting player based on position probabilities
             if (randomPosition < 0.4) {
                 // Forward (ids 9-11)
-                assist.id = Math.floor(Math.random() * 3) + 9;
+                assist.id = (scorerId === undefined || scorerId < 9 || scorerId > 11) ? Math.floor(Math.random() * 3) + 9 : Math.floor(Math.random() * 3) + 6;
             } else if (randomPosition < 0.8) {
                 // Midfield (ids 6-8)
-                assist.id = Math.floor(Math.random() * 3) + 6;
+                assist.id = (scorerId === undefined || scorerId < 6 || scorerId > 8) ? Math.floor(Math.random() * 3) + 6 : Math.floor(Math.random() * 3) + 2;
             } else {
                 // Defender (ids 2-5)
-                assist.id = Math.floor(Math.random() * 4) + 2;
+                assist.id = (scorerId === undefined || scorerId < 2 || scorerId > 5) ? Math.floor(Math.random() * 4) + 2 : Math.floor(Math.random() * 4) + 6;
             }
 
             return assist;
@@ -993,7 +1240,7 @@
                     }
                 }
             })
-            $(".spinner-border").hide()
+            $(".spinner-border").hide();
             $("#teamInfos").modal('show');
         }
     })

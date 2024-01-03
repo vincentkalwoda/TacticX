@@ -961,7 +961,7 @@ table tbody tr {
     white-space: nowrap;
 }
 
-.group-40 #rating, #flag {
+.group-40 #rating, #flag, #idPlayer {
     color: rgba(0, 0, 0, 0);
     font-size: 0;
 }
@@ -1124,7 +1124,7 @@ table tbody tr {
     letter-spacing: 0;
     line-height: normal;
     white-space: nowrap;
-    z-index: 2;
+    z-index: 10;
 }
 
 .frame .row {
@@ -1182,7 +1182,7 @@ table tbody tr {
 
 .frame .team-svg {
     position: absolute;
-    z-index: 1;
+    z-index: 9;
 }
 
 .frame .group-41 {
@@ -1349,6 +1349,18 @@ table tbody tr {
     background-color: #171720;
 }
 
+#coins {
+    position: absolute;
+    top: 35px;
+    left: 0;
+    color: #5F5FFF;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+#save {
+    z-index: 1;
+}
 
 /* Firefox */
 * {

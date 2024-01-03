@@ -50,6 +50,8 @@
             </div>
         </div>
         <div class="group-8">
+            <div id="coins"><i class="fa-solid fa-coins"></i> <%= coins %></div>
+
             <div class="overlap-2">
 
                 <div class="group-23">
@@ -143,7 +145,10 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="group-35">
+                            <i class="fa-solid fa-floppy-disk" id="save"
+                               style="position: absolute; color: white; font-size: 30px; right: 20px; top:-5px;"></i>
                             <%
                             let strKitColour1;
                             for (const x of teams) {
@@ -211,6 +216,7 @@ if (x.idPlayer === y.idPlayer) {
                 </div>
             </div>
         </div>
+        <p id="idPlayer-<%= x.positionOnField %>"><%= y.idPlayer %></p>
         <p id="rating"><%= y.intRating %></p>
         <p id="flag"><%= flag %></p>
     </div>
@@ -222,8 +228,40 @@ if (x.idPlayer === y.idPlayer) {
 }
 }
 %>
-
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
+
+    $(document).ready(function () {
+        $('#save').on('click', function () {
+            let aufstellung = [];
+            for (let i = 1; i <= 11; i++) {
+                let idPlayerElement = document.getElementById(`idPlayer-${i}`);
+                if (idPlayerElement && idPlayerElement.textContent) {
+                    let idPlayer = idPlayerElement.textContent;
+                    aufstellung.push({positionOnField: i, idPlayer: idPlayer});
+                }
+            }
+            console.log(aufstellung)
+        });
+    });
+
+
+    function sendAufstellung(aufstellung) {
+        fetch('http://localhost:3000/updateAufstellung', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(aufstellung),
+        })
+            .then(response => response.text())
+            .then(data => {
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
     var table = document.getElementById("rest");
     var lastSortedColumn = -1;  // Track the last sorted column
     var ascendingOrder = true;   // Track the sorting order
@@ -376,6 +414,7 @@ if (x.idPlayer === y.idPlayer) {
             var playerPosition = draggedElement.querySelector('#position').innerText;
             var playerNumber = draggedElement.id;
             var playerFlag = draggedElement.querySelector('#flag').src;
+            var idPlayer = draggedElement.querySelector('#idPlayer').innerText;
 
             // Create a new element with the desired structure
             var newElement = document.createElement('div');
@@ -398,6 +437,7 @@ if (x.idPlayer === y.idPlayer) {
                 </div>
             </div>
         </div>
+        <p id="idPlayer-${validDropTarget.id}">${idPlayer}</p>
         <p id="rating">${playerRating}</p>
         <p id="flag">${playerFlag}</p>
     `;
@@ -435,12 +475,9 @@ if (teamID == null || leagueID == null) {
 <%
 }
 %>
+<script src="https://kit.fontawesome.com/055b9b90fa.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
-<script src='https://code.jquery.com/jquery-3.7.0.js'></script>
-<!-- Data Table JS -->
-<script src='https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js'></script>
-<script src='https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js'></script>
-<script src='https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js'></script>
 <script src="../js/index.js"></script>
 </body>
 </html>

@@ -501,9 +501,22 @@ app.post('/updateTable', (request, response) => {
     }
 });
 
+app.post('/updateAufstellung', (request, response) => {
+    const aufstellung = JSON.stringify(request.body);
+    if (request.session.loggedin) {
+        let username = request.session.username;
+
+        connection.query('UPDATE users SET aufstellung = ? WHERE username = ?', [aufstellung, username], async function (error, results, fields) {
+            if (error) {
+                throw error;
+            } else {
+            }
+        });
+    }
+});
+
 app.post('/updatePlayers', (request, response) => {
     const x = JSON.stringify(request.body);
-    console.log(x)
     if (request.session.loggedin) {
         const username = request.session.username;
 
@@ -535,6 +548,20 @@ app.post('/updateSpieltag', (request, response) => {
                     } else {
                     }
                 });
+            }
+        });
+    }
+});
+
+app.post('/updateCoins', (request, response) => {
+    let coins = request.body.coins;
+    if (request.session.loggedin) {
+        let username = request.session.username;
+
+        connection.query('UPDATE users SET coins = ? WHERE username = ?', [coins, username], async function (error, results, fields) {
+            if (error) {
+                throw error;
+            } else {
             }
         });
     }

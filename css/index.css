@@ -977,12 +977,20 @@ label {
     white-space: nowrap;
 }
 
-#next {
+#coins {
     position: absolute;
-    top: 50px;
-    right: 450px;
+    top: 35px;
+    left: 0;
     color: #5F5FFF;
+    font-weight: 700;
+    font-size: 20px;
 }
+
+.stats {
+    margin-top: 10px;
+    border-top: rgba(255, 255, 255, 0.1) solid 1px;
+}
+
 
 .btn {
     width: 100%;

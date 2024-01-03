@@ -49,6 +49,7 @@
         </div>
     </div>
     <div class="group-9">
+        <div id="coins"><i class="fa-solid fa-coins"></i> <%= coins %></div>
         <div class="text-wrapper-4">Kommende Spiele
             <div class="kommende-spiele">
                 <%
@@ -154,7 +155,7 @@
             <div class="statistiken">
                 <div class="overlap-group-wrapper">
                     <div class="overlap-3">
-                        <div class="text-wrapper-27">Torschützenliste</div>
+                        <div class="text-wrapper-27">Tore</div>
                         <div class="div-2">
                             <%
                             players.sort((a, b) => b.intGoals - a.intGoals);
@@ -176,7 +177,7 @@
                 </div>
                 <div class="overlap-group-wrapper">
                     <div class="overlap-3">
-                        <div class="text-wrapper-27">Torvorlagen</div>
+                        <div class="text-wrapper-27">Vorlagen</div>
                         <div class="div-2">
                             <%
                             players.sort((a, b) => b.intAssists - a.intAssists);
@@ -197,21 +198,22 @@
                 </div>
                 <div class="overlap-group-wrapper">
                     <div class="overlap-3">
-                        <div class="text-wrapper-27">Durchschnitts-Bewertung</div>
+                        <div class="text-wrapper-27">Tore + Vorlagen</div>
                         <div class="div-2">
                             <%
-                            players.sort((a, b) => b.intAvgRating - a.intAvgRating);
+                            players.sort((a, b) => (b.intAssists + b.intGoals) - (a.intAssists + a.intGoals));
+                            for (let i = 0; i < 4; i++) {
                             for(let i = 0;i < 4;i++) {
-                            if(players[i].intAvgRating !== 6) {
+                            if((players[i].intGoals + players[i].intAssists) !== 0) {
                             %>
                             <div class="div-3">
                                 <div class="text-wrapper-28"><%= players[i].strPlayer %></div>
                                 <div class="overlap-group-2">
-                                    <div class="text-wrapper-29"><%= players[i].intAvgRating %></div>
+                                    <div class="text-wrapper-29"><%= (players[i].intGoals + players[i].intAssists) %></div>
                                 </div>
                             </div>
                             <%
-                            }
+                            }}
                             }
                             %>
                         </div>
@@ -236,6 +238,8 @@ if (teamID == null || leagueID == null) {
 <script src='https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js'></script>
 <script src='https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js'></script>
 <script src='https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js'></script>
+<script src="https://kit.fontawesome.com/055b9b90fa.js" crossorigin="anonymous"></script>
+
 <script src="../js/index.js"></script>
 </body>
 </html>

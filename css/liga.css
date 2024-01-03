@@ -1329,6 +1329,15 @@ html, body {
     margin-right: 10px;
 }
 
+#coins {
+    position: absolute;
+    top: 35px;
+    left: 0;
+    color: #5F5FFF;
+    font-weight: 700;
+    font-size: 20px;
+}
+
 
 /* Firefox */
 * {
