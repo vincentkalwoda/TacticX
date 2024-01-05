@@ -17,10 +17,10 @@ app.set('view engine', 'ejs');
 app.use(json({limit: '10mb'}));
 
 const connection  = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'admin',
-    database: 'tacticx',
+    host: '91.151.17.12',
+    user: 'u233744db1',
+    password: 'tacticx',
+    database: 'u233744db1',
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
@@ -236,6 +236,27 @@ app.post('/selectTeam', async function (request, response) {
                 status = false;
             }
 
+            let shopIn = []
+            let price
+            while (shopIn.length !== 6) {
+                let index = Math.floor(Math.random() * players.length);
+                if (players[index].idTeam !== team && players[index].idTeam2 !== team && players[index].intRating !== 0 && players[index].strNumber !== "" && !shopIn.includes(players[index])) {
+                    price = generateMarketPrice(players[index].intRating)
+                    shopIn.push({idPlayer: players[index].idPlayer, price: price, typ: 0});
+                }
+            }
+
+            let shopOut = []
+            while (shopOut.length !== 6) {
+                let index = Math.floor(Math.random() * players.length);
+                if (players[index].idTeam === team && players[index].intRating !== 0 && players[index].strNumber !== "" && !shopOut.includes(players[index])) {
+                    price = generateMarketPrice(players[index].intRating)
+                    shopOut.push({idPlayer: players[index].idPlayer, price: price, typ: 1});
+                }
+            }
+
+            let shop = JSON.stringify(shopIn.concat(shopOut));
+
             let positions = {
                 'GK': 1,
                 'LB': 2,
@@ -331,7 +352,7 @@ app.post('/selectTeam', async function (request, response) {
 
 
             players = JSON.stringify(players)
-            connection.query('UPDATE users set coins=?, leagueID = ?, teamID = ?, spieltag=?, aufstellung = ?, spieler = ?, kalendar = ?, tabelle = ?, teams = ?, players = ?  WHERE username = ?', [0, league, team, 1, aufstellung, spieler, kalendar, tabelle, teams, players, username], function (error, results, fields) {
+            connection.query('UPDATE users set coins=?, leagueID = ?, teamID = ?, spieltag=?, aufstellung = ?, spieler = ?, kalendar = ?, tabelle = ?, teams = ?, players = ?, shop = ?  WHERE username = ?', [0, league, team, 1, aufstellung, spieler, kalendar, tabelle, teams, players, shop, username], function (error, results, fields) {
                 if (error) throw error;
                 else
                     response.redirect('/dashboard');
@@ -533,6 +554,41 @@ app.post('/updatePlayers', (request, response) => {
     }
 });
 
+app.post('/deleteProgress', (request, response) => {
+    if (request.session.loggedin) {
+        const username = request.session.username;
+
+        connection.query('UPDATE users SET coins = ?, leagueID = ?, teamID = ? WHERE username = ?', [0, null, null, username], function (error, results, fields) {
+            if (error) {
+                throw error;
+            } else {
+                // Handle success, if needed
+                response.sendStatus(200);
+            }
+        });
+    } else {
+        response.sendStatus(401); // Unauthorized
+    }
+});
+
+app.post('/updateTeams', (request, response) => {
+    const x = JSON.stringify(request.body);
+    if (request.session.loggedin) {
+        const username = request.session.username;
+
+        connection.query('UPDATE users SET teams = ? WHERE username = ?', [x, username], function (error, results, fields) {
+            if (error) {
+                throw error;
+            } else {
+                // Handle success, if needed
+                response.sendStatus(200);
+            }
+        });
+    } else {
+        response.sendStatus(401); // Unauthorized
+    }
+});
+
 app.post('/updateSpieltag', (request, response) => {
 
     if (request.session.loggedin) {
@@ -542,7 +598,31 @@ app.post('/updateSpieltag', (request, response) => {
             if (error) {
                 throw error;
             } else {
-                connection.query('UPDATE users SET spieltag = ? WHERE username = ?', [results[0].spieltag + 1, username], async function (error, results, fields) {
+                let team = results[0].teamID
+                let players = JSON.parse(results[0].players);
+                let shopIn = []
+                let price
+                while (shopIn.length !== 6) {
+                    let index = Math.floor(Math.random() * players.length);
+                    if (players[index].idTeam !== team && players[index].idTeam2 !== team && players[index].intRating !== 0 && players[index].strNumber !== "" && !shopIn.includes(players[index])) {
+                        price = generateMarketPrice(players[index].intRating)
+                        shopIn.push({idPlayer: players[index].idPlayer, price: price, typ: 0});
+                    }
+                }
+
+                let shopOut = []
+                while (shopOut.length !== 6) {
+                    let index = Math.floor(Math.random() * players.length);
+                    if (players[index].idTeam === team && players[index].intRating !== 0 && players[index].strNumber !== "" && !shopOut.includes(players[index])) {
+                        price = generateMarketPrice(players[index].intRating)
+                        shopOut.push({idPlayer: players[index].idPlayer, price: price, typ: 1});
+                    }
+                }
+
+                let shop = JSON.stringify(shopIn.concat(shopOut));
+
+
+                connection.query('UPDATE users SET spieltag = ?, shop = ? WHERE username = ?', [results[0].spieltag + 1, shop, username], async function (error, results, fields) {
                     if (error) {
                         throw error;
                     } else {
@@ -593,7 +673,8 @@ async function loadUserData(username, callback) {
                     tabelle: JSON.parse(results[0].tabelle),
                     teams: JSON.parse(results[0].teams),
                     players: JSON.parse(results[0].players),
-                    countries: countries
+                    countries: countries,
+                    shop: JSON.parse(results[0].shop)
                 };
             }
             callback(userData);
@@ -609,6 +690,16 @@ function loadPlayerData() {
             playerData = results;
         }
     });
+}
+
+function generateMarketPrice(rating) {
+    // Assuming a linear relationship between rating and market price
+    const basePrice = 0;
+    const pricePerRating = Math.floor(Math.random() + 3);
+
+    const marketPrice = basePrice + rating * pricePerRating;
+
+    return Math.max(0, marketPrice);
 }
 
 app.listen(3000);

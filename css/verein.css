@@ -75,6 +75,39 @@ html, body {
     left: 0;
 }
 
+.frame .userinfo {
+    position: absolute;
+    width: 296px;
+    height: 99px;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    overflow: hidden;
+}
+
+.frame .ellipse {
+    width: 50px;
+    height: 50px;
+    background: #4242a2;
+    border-radius: 25px;
+    margin-left: 15px;
+
+}
+
+.frame .text-wrapper-3 {
+    align-items: center;
+    font-family: "Roboto", Helvetica, serif;
+    font-weight: 700;
+    color: #a1a1a1;
+    font-size: 20px;
+    letter-spacing: 0;
+    line-height: normal;
+    white-space: nowrap;
+    text-align: right;
+}
+
 .frame .text-wrapper {
     position: absolute;
     top: 1px;
@@ -349,19 +382,6 @@ html, body {
     object-fit: cover;
 }
 
-.frame .text-wrapper-3 {
-    position: absolute;
-    top: 165px;
-    left: 20px;
-    font-family: "Roboto-Black", Helvetica;
-    font-weight: 900;
-    color: #5f5fff;
-    font-size: 32px;
-    text-align: center;
-    letter-spacing: 0;
-    line-height: normal;
-    white-space: nowrap;
-}
 
 .frame .overlap-wrapper {
     position: absolute;
@@ -393,14 +413,8 @@ html, body {
     position: absolute;
     width: 1382px;
     height: 990px;
-    top: 0;
+    top: 50px;
     left: 444px;
-}
-
-.frame .overlap-2 {
-    position: relative;
-    width: 1384px;
-    height: 990px;
 }
 
 .frame .group-9 {
@@ -834,15 +848,6 @@ table tbody tr {
     left: 1261px;
 }
 
-.frame .ellipse {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    top: 0;
-    left: 71px;
-    background-color: #747474;
-    border-radius: 25px;
-}
 
 .frame .text-wrapper-12 {
     position: absolute;
@@ -961,10 +966,11 @@ table tbody tr {
     white-space: nowrap;
 }
 
-.group-40 #rating, #flag, #idPlayer {
+.group-40 #rating, #flag, #idPlayer, #number {
     color: rgba(0, 0, 0, 0);
     font-size: 0;
 }
+
 
 .frame .group-30 {
     position: absolute;
