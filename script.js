@@ -240,7 +240,7 @@ app.post('/selectTeam', async function (request, response) {
             let price
             while (shopIn.length !== 6) {
                 let index = Math.floor(Math.random() * players.length);
-                if (players[index].idTeam !== team && players[index].idTeam2 !== team && players[index].intRating !== 0 && players[index].strNumber !== "" && !shopIn.includes(players[index])) {
+                if (players[index].idTeam !== team && players[index].idTeam2 !== team && players[index].intRating !== 0 && players[index].strNumber !== "" && !shopIn.some(item => item.idPlayer === players[index].idPlayer)) {
                     price = generateMarketPrice(players[index].intRating)
                     shopIn.push({idPlayer: players[index].idPlayer, price: price, typ: 0});
                 }
@@ -249,7 +249,7 @@ app.post('/selectTeam', async function (request, response) {
             let shopOut = []
             while (shopOut.length !== 6) {
                 let index = Math.floor(Math.random() * players.length);
-                if (players[index].idTeam === team && players[index].intRating !== 0 && players[index].strNumber !== "" && !shopOut.includes(players[index])) {
+                if (players[index].idTeam === team && players[index].intRating !== 0 && players[index].strNumber !== "" && !shopOut.some(item => item.idPlayer === players[index].idPlayer)) {
                     price = generateMarketPrice(players[index].intRating)
                     shopOut.push({idPlayer: players[index].idPlayer, price: price, typ: 1});
                 }
