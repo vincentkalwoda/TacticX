@@ -270,7 +270,8 @@
             <div class="ergebnis-text">
                 Ergebnisse
                 <div class="ergebnisse">
-                    <% for(const x of kalendar) {
+                    <%
+                    if(teamID) { for(const x of kalendar) {
                     if(x.intRound == spieltag - 1) {
                         let date, team1_badge, team2_badge, team1, team2
                         const inputDate = Date.parse(x.dateEvent)
@@ -305,7 +306,8 @@
                     </div>
                     <%
                     }
-                    } %>
+                    }
+                    }%>
                 </div>
             </div>
             <div class="userinfo" id="userinfo" onclick="toggleDropdown()">
@@ -321,6 +323,7 @@
             <div class="matches" id="matches">
                 <div class="matches-text">Deine Matches</div>
                 <%
+                if(teamID) {
                 let i = 0
                         for (const x of kalendar) {
                     let team1, team2, team1_badge, team2_badge, stadium, date, gegner;
@@ -377,11 +380,12 @@
                 <% }
                     i++;
                 }
-                } %>
+                }} %>
             </div>
             <div class="next-match" id="next-match">
                 <div class="next-matches-text">N&auml;chstes Match</div>
                 <%
+                if(teamID) {
                 i = 0
                         for (const x of kalendar) {
                     let i = 0
@@ -441,7 +445,8 @@
                 <%
                 }
                 }
-                } %>
+                }
+                }%>
             </div>
         </div>
     </div>

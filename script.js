@@ -107,7 +107,7 @@ app.post('/auth2', function(request, response) {
 //SelectTeam Datenbank
 app.post('/selectTeam', async function (request, response) {
     if (request.session.loggedin) {
-        await loadPlayerData();
+        playerData = await loadPlayerData();
         let league = request.body.ligaDropdown;
         let team = request.body.teamDropdown;
         let username = request.session.username;
@@ -352,7 +352,7 @@ app.post('/selectTeam', async function (request, response) {
 
 
             players = JSON.stringify(players)
-            connection.query('UPDATE users set coins=?, leagueID = ?, teamID = ?, spieltag=?, aufstellung = ?, spieler = ?, kalendar = ?, tabelle = ?, teams = ?, players = ?, shop = ?  WHERE username = ?', [0, league, team, 1, aufstellung, spieler, kalendar, tabelle, teams, players, shop, username], function (error, results, fields) {
+            connection.query('UPDATE users set coins=?, leagueID = ?, teamID = ?, spieltag=?, aufstellung = ?, kalendar = ?, tabelle = ?, teams = ?, players = ?, shop = ?  WHERE username = ?', [0, league, team, 1, aufstellung, kalendar, tabelle, teams, players, shop, username], function (error, results, fields) {
                 if (error) throw error;
                 else
                     response.redirect('/dashboard');
@@ -668,7 +668,6 @@ async function loadUserData(username, callback) {
                     spieltag: results[0].spieltag,
                     formation: results[0].formation,
                     aufstellung: JSON.parse(results[0].aufstellung),
-                    spieler: JSON.parse(results[0].spieler),
                     kalendar: JSON.parse(results[0].kalendar),
                     tabelle: JSON.parse(results[0].tabelle),
                     teams: JSON.parse(results[0].teams),
@@ -682,13 +681,15 @@ async function loadUserData(username, callback) {
     });
 }
 
-function loadPlayerData() {
-    connection.query('SELECT * FROM player_data', [], function (error, results, fields) {
-        if (error) {
-            throw error;
-        } else {
-            playerData = results;
-        }
+async function loadPlayerData() {
+    return new Promise((resolve, reject) => {
+        connection.query('SELECT * FROM player_data', [], function (error, results, fields) {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(results);
+            }
+        });
     });
 }
 
